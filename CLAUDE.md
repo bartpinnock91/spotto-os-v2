@@ -58,9 +58,28 @@ Shared context lives in `company/`:
 - `strategy.md` - Strategic goals
 - `glossary.md` - Shared terminology
 
+## MCP Integrations
+
+This repo uses MCP servers for direct integration:
+
+| Server | Purpose | Usage |
+|--------|---------|-------|
+| **Figma** | Access designs | Paste Figma frame links in conversations |
+| **Jira** | Push/pull stories | Create tickets, query issues, archive done stories |
+
+Setup instructions: [docs/mcp-setup.md](docs/mcp-setup.md)
+
+### Working with Designs
+
+Each product has its own Figma file. When working on a product:
+1. Share the relevant Figma link for the feature/screen
+2. Claude can fetch design context directly via MCP
+3. Include Figma links in draft stories for reference
+
 ## Guidelines
 
 - **Never edit archived stories** - they are immutable records
 - **Drafts are disposable** - Jira becomes the source once pushed
 - **Context is valuable** - Keep product context up to date
 - **Use templates** - Ensures consistency across stories
+- **Include Figma links** - Reference designs in stories when relevant
