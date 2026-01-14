@@ -1,0 +1,34 @@
+- Geen data bsechikbaar omdat de eigen vekopen te klein is
+- Whise
+- Google sheets overigens
+- Interesse in eigen gemeente of naburige gemeenten
+- Vooral opzoek naar vergelijkingspunten
+- Trends
+  - EPC
+    - Welk EPC label makkelijk?
+    - Wat is de invloed van het EPC
+  - Woning of appartementen gaan beter
+- Waardebepalers cursus van CIB via excel die zelfgemaakt is
+- Een aantal panden bij de waardebepaling kunnen vermelden
+- Affichagerpijs vs reële prijs
+  - Gemiddeld in de regio de prijs
+  - Slechte ramen vs goede ramen
+  - Wel gebruikt met affichageprijs maar net iets minder interessant
+  - Prijs per m2
+- Ook kunnen gebruiken bij het gesprek bij de kopers om te kunnen staven dat het een juiste prijs is
+- Duurtijd dat het online heeft gestaan
+- Ligging → Postcodes vs zones
+- Ligging mag concreet zijn maar hoeft niet specifiek de straat + bus zijn
+- Grondwaarde → groter grond is goedkoper per m2
+- Verkaveling tov grondwaarde
+- Oriëntatie is niet zo belangrijk
+- Aantal slaapkamers → voor huizen 1/2 kamers niet belangrijk, 4 slaapkamers bij huizen heel populair
+- Bouwjaar en EPC hangt samen qua prijs
+- Zimmo
+  - Voor bouwgronden prijzen per m2 zeer interessant
+  - Bij huizen ook gebruikt
+- Geen gebruik van de realo prijswijzer
+- Schatting wordt niet afgegeven aan de verkoper
+- Bij starters appartement kopen om later wel te verhuren als ze een huis willen kopen
+- Moest investr beschikbaar zijn, zou het wel gebruikt worden
+- One pager meesturen met contactaanvraag

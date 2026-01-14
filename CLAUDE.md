@@ -4,11 +4,11 @@ This repo is the **thinking ground** for product management. Jira is the **sourc
 
 ## Products
 
-| Product | Folder | Description |
-|---------|--------|-------------|
-| Spotto | `products/spotto/` | B2C real estate platform (spotto.be) |
-| Vergelijkingspanden | `products/vergelijkingspanden/` | B2B comparable properties tool for agents |
-| Markttendensen | `products/markttendensen/` | B2B market insights dashboard |
+| Product             | Folder                          | Jira Key | Description                               |
+| ------------------- | ------------------------------- | -------- | ----------------------------------------- |
+| Spotto              | `products/spotto/`              | SPOTTO   | B2C real estate platform (spotto.be)      |
+| Vergelijkingspanden | `products/vergelijkingspanden/` | VP       | B2B comparable properties tool for agents |
+| Markttendensen      | `products/markttendensen/`      | MT       | B2B market insights dashboard             |
 
 ## Workflow
 
@@ -18,22 +18,26 @@ DRAFT (here) → PUSH TO JIRA → JIRA (active) → DONE → ARCHIVE (here)
 
 ### 1. Drafting Stories
 
-Create draft stories in `products/{product}/drafts/` using templates from `templates/`.
+Create draft stories in `products/{product}/drafts/` using templates from `templates/`. Write all stories in dutch.
 
 **Draft status lifecycle:**
+
 - `Draft` - Work in progress, not ready
 - `Ready for Jira` - Finalized, ready to push
 
 ### 2. Pushing to Jira
 
 When a story is "Ready for Jira":
-1. Use Jira MCP to create the ticket
-2. Add the Jira ticket ID to the draft
-3. Move or delete the draft (Jira is now source of truth)
+
+1. Use Jira MCP to create the ticket (use project key from table above)
+2. Delete the draft file - Jira is now the single source of truth
+
+**Available issue types:** Epic, Story, Bug, Task, Subtask
 
 ### 3. Archiving Completed Stories
 
 When stories are Done in Jira:
+
 1. Pull the story with full metadata (comments, time spent, etc.)
 2. Save to `products/{product}/archive/`
 3. These become immutable records for analysis
@@ -41,6 +45,7 @@ When stories are Done in Jira:
 ## Folder Structure
 
 Each product has:
+
 - `context/` - Personas, competitors, feature overview
 - `roadmap/` - High-level product roadmap
 - `drafts/` - WIP stories (delete after pushing to Jira)
@@ -54,6 +59,7 @@ Each product has:
 ## Company Context
 
 Shared context lives in `company/`:
+
 - `vision.md` - Company vision & mission
 - `strategy.md` - Strategic goals
 - `glossary.md` - Shared terminology
@@ -62,16 +68,17 @@ Shared context lives in `company/`:
 
 This repo uses MCP servers for direct integration:
 
-| Server | Purpose | Usage |
-|--------|---------|-------|
-| **Figma** | Access designs | Paste Figma frame links in conversations |
-| **Jira** | Push/pull stories | Create tickets, query issues, archive done stories |
+| Server    | Purpose           | Usage                                              |
+| --------- | ----------------- | -------------------------------------------------- |
+| **Figma** | Access designs    | Paste Figma frame links in conversations           |
+| **Jira**  | Push/pull stories | Create tickets, query issues, archive done stories |
 
 Setup instructions: [docs/mcp-setup.md](docs/mcp-setup.md)
 
 ### Working with Designs
 
 Each product has its own Figma file. When working on a product:
+
 1. Share the relevant Figma link for the feature/screen
 2. Claude can fetch design context directly via MCP
 3. Include Figma links in draft stories for reference
@@ -79,7 +86,13 @@ Each product has its own Figma file. When working on a product:
 ## Guidelines
 
 - **Never edit archived stories** - they are immutable records
-- **Drafts are disposable** - Jira becomes the source once pushed
-- **Context is valuable** - Keep product context up to date
+- **Delete drafts after pushing** - Jira is the single source of truth, don't keep local copies
+- **Context is valuable** - Keep product context up to date (tracking setup, personas, etc.)
 - **Use templates** - Ensures consistency across stories
 - **Include Figma links** - Reference designs in stories when relevant
+
+### Single Source of Truth
+
+- **Backlog order lives in Jira** - Never duplicate story lists or order in epic descriptions
+- **Epics explain strategy, not order** - Describe the _why_ behind prioritization, not the sequence itself
+- **Reference, don't repeat** - If you need to mention stories, link to them rather than listing them

@@ -1,17 +1,16 @@
 {
   "permissions": {
     "allow": [
+      "Read",
+      "Write",
+      "Edit",
       "Bash(dir:*)",
       "Bash(claude mcp:*)",
       "Bash(python -m uvx:*)",
       "Bash(python -m uv tool run:*)",
-      "mcp__atlassian__jira_get_all_projects",
-      "mcp__atlassian__jira_search",
       "Bash(python:*)",
-      "mcp__atlassian__jira_update_issue",
-      "mcp__figma__get_design_context",
-      "mcp__figma__get_screenshot",
-      "mcp__figma__get_metadata"
+      "mcp__atlassian__*",
+      "mcp__figma__*"
     ]
   },
   "enableAllProjectMcpServers": true,
