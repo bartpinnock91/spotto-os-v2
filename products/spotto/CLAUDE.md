@@ -26,6 +26,7 @@ Belgian real estate platform for property search - buying and renting.
 ## Links
 
 - **Jira Project:** [SPOTTO](https://orisnv.atlassian.net/browse/SPOTTO)
+- **Codebase:** [ImmoX](https://dev.azure.com/build-orisnv/_git/ImmoX) (Azure DevOps)
 - **Production:** https://www.spotto.be
 
 ## Jira

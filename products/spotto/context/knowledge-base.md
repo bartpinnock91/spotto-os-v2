@@ -7,6 +7,12 @@ Spotto is a B2C Belgian real estate platform for property search - buying and re
 - **Website:** [spotto.be](https://www.spotto.be)
 - **Backoffice:** backoffice.spotto.be
 - **Jira Project:** SPOTTO
+- **Linear Workspace:** Eikhart (Team: Spotto)
+
+## Key Team Members
+
+- **Ramon Eijkemans** - SEO Lead, manages most technical SEO and authority projects
+- **Spotto team** - Product team handling implementation and product initiatives
 
 ## Core Features
 
@@ -86,3 +92,50 @@ Part of Oris NV / Immo United ecosystem, with VLAIO partnership for public/profe
 
 - **Vergelijkingspanden (TRANSDATA)** - B2B comparable properties tool, shares team resources
 - **Markttendensen** - B2B market insights dashboard
+
+## Current Strategic Focus Areas (2025-2026)
+
+### SEO & Technical Optimization
+- **Hygiëne (Deduplication):** Fixing duplicate content issues across 100k+ pages
+- **Structured Data:** Implementing schema.org for rich results
+- **Pagerank Flow:** Optimizing internal linking structure
+- **Warm welkom:** Personalized landing page content for locations
+
+### AI & Future Search
+- **LLM/GEO/AI SEO:** Preparing for AI-powered search engines
+- **ChatGPT Integration:** MCP-based property search integration planned
+
+### Authority Building
+- **Wikipedia presence:** Building brand authority through Wikipedia
+- **EPC Authority:** Data journalism around energy performance certificates
+- **Content clusters:** Niche landing pages for EPC, renovatie, budget, buurt topics
+
+### Future Initiatives (2026)
+- **Location pages:** SEO pages for gemeenten, deelgemeenten, wijken, buurten
+- **Address pages:** "Huispedia-style" permanent property insight pages
+- **Woninginzicht-pagina:** Property insights for owners (market position, EPC, etc.)
+
+## SEO Key Metrics
+
+| Metric | Purpose |
+|--------|---------|
+| GSC "Duplicate canonical" | Track duplicate content issues |
+| Indexed pages | Monitor index coverage |
+| URL positions | Track ranking improvements |
+| Rich results | Measure structured data success |
+| AI visibility | Track mentions in ChatGPT/LLMs |
+
+## Geographic Hierarchy (Belgium)
+
+Spotto content can be structured at different NIS levels:
+1. **Gemeenten** (municipalities): e.g., 9000 Gent
+2. **Deelgemeenten** (sub-municipalities): e.g., 9032 Wondelgem
+3. **Wijken** (neighborhoods): e.g., 9000 Gent Zuid
+4. **Sectoren/buurten** (sectors): e.g., 9000 Gent Zuid - Sint-Anna
+
+## External Context Documents
+
+- [SEO Strategy](seo-strategy.md) - Detailed SEO initiatives and technical approach
+- [Linear Projects](linear-projects.md) - All active projects from Linear
+- [Strategy 2026](strategy-2026.md) - Board-approved strategic initiatives
+- [Strategy 2026 Initiative Details](strategy-2026-initiatives-details.md) - Detailed initiative breakdown

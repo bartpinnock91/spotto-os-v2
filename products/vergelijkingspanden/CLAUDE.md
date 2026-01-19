@@ -51,7 +51,7 @@ Comparable properties search tool for real estate agents. Helps agents find simi
 - **Jira Project:** [TRANSDATA](https://orisnv.atlassian.net/jira/software/projects/TRANSDATA)
 - **Figma Designs:** [RS | Spotto](https://www.figma.com/design/D88mnHjMhaqL2mVFSTSEck/RS-%7C-Spotto)
 - **Confluence:** [IMMOX Wiki](https://orisnv.atlassian.net/wiki/spaces/IMMOX/)
-- **Azure DevOps:** [Dataplatform](https://dev.azure.com/build-orisnv/Dataplatform)
+- **Codebase:** [Dataplatform](https://dev.azure.com/build-orisnv/_git/Dataplatform) (Azure DevOps)
 
 ---
 

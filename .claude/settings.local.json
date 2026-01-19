@@ -4,18 +4,42 @@
       "Read",
       "Write",
       "Edit",
+      "Glob",
+      "Grep",
       "Bash(dir:*)",
-      "Bash(claude mcp:*)",
+      "Bash(cd:*)",
+      "Bash(type:*)",
+      "Bash(mkdir:*)",
+      "Bash(del:*)",
+      "Bash(move:*)",
+      "Bash(copy:*)",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git mv:*)",
+      "Bash(git branch:*)",
+      "Bash(git checkout:*)",
+      "Bash(git pull:*)",
+      "Bash(git push:*)",
+      "Bash(gh api:*)",
+      "Bash(powershell:*)",
+      "Bash(python:*)",
       "Bash(python -m uvx:*)",
       "Bash(python -m uv tool run:*)",
-      "Bash(python:*)",
+      "Bash(claude mcp:*)",
       "mcp__atlassian__*",
-      "mcp__figma__*"
+      "mcp__figma__*",
+      "mcp__azure-devops__*",
+      "mcp__linear__*"
     ]
   },
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "figma",
-    "atlassian"
+    "atlassian",
+    "azure-devops",
+    "linear"
   ]
 }
