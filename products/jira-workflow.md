@@ -1,6 +1,6 @@
 # Jira Workflow
 
-> Last updated: 2026-01-16
+> Last updated: 2026-01-21
 
 Shared workflow across all products.
 
@@ -44,6 +44,7 @@ Shared workflow across all products.
 | Test Failed | To Do | QA found issues, needs rework |
 | In Progress | In Progress | Actively being worked on |
 | Ready for Test | Done | Development complete, awaiting QA |
+| QA Testing in Progress | In Progress | QA actively testing |
 | Resolved | Done | Verified and completed |
 | Closed | Done | Fully completed and closed |
 | Declined | Done | Not going to be implemented |
@@ -81,8 +82,27 @@ Transitions move issues between statuses. The available transitions depend on th
 ### From Ready for Test
 | Transition | ID | Target Status |
 |------------|-----|---------------|
-| Start testing | 91 | QA Testing |
+| Start testing | 91 | QA Testing in Progress |
 | Cannot test | 261 | Blocked |
+
+### From QA Testing in Progress
+| Transition | ID | Target Status |
+|------------|-----|---------------|
+| Test Successful | 101 | Resolved |
+| Test Failed | 111 | Test Failed |
+
+### From Test Failed
+| Transition | ID | Target Status |
+|------------|-----|---------------|
+| Restart work | 121 | In Progress |
+
+### From Resolved
+| Transition | ID | Target Status |
+|------------|-----|---------------|
+| Confirmed | 141 | Closed |
+| Confirmed | 61 | Closed |
+
+> **Note:** The transition ID varies by issue type. Standard issues use ID 141, while Showstopper issues use ID 61.
 
 ## Priorities
 
@@ -97,6 +117,6 @@ Transitions move issues between statuses. The available transitions depend on th
 ## Notes
 
 - New stories default to "Functional Analysis" status
-- The workflow follows: FA → TA → Estimation → Ready for Dev → In Progress → Ready for Test → QA Testing → Resolved → Closed
+- The workflow follows: FA → TA → Estimation → Ready for Dev → In Progress → Ready for Test → QA Testing in Progress → Resolved → Closed
 - Issues can be Declined at various stages
 - Blocked status can be entered from In Progress when dependencies arise

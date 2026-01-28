@@ -32,7 +32,10 @@
       "mcp__atlassian__*",
       "mcp__figma__*",
       "mcp__azure-devops__*",
-      "mcp__linear__*"
+      "mcp__linear__*",
+      "mcp__notion__*",
+      "mcp__analytics-mcp__*",
+      "mcp__google-search-console__*"
     ]
   },
   "enableAllProjectMcpServers": true,
@@ -40,6 +43,9 @@
     "figma",
     "atlassian",
     "azure-devops",
-    "linear"
+    "linear",
+    "notion",
+    "analytics-mcp",
+    "google-search-console"
   ]
 }

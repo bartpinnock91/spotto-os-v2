@@ -7,7 +7,7 @@ This repo is the **thinking ground** for product management. Jira is the **sourc
 | Product             | Folder                          | Jira Key | Description                               |
 | ------------------- | ------------------------------- | -------- | ----------------------------------------- |
 | Spotto              | `products/spotto/`              | SPOTTO   | B2C real estate platform (spotto.be)      |
-| Vergelijkingspanden | `products/vergelijkingspanden/` | VP       | B2B comparable properties tool for agents |
+| Vergelijkingspanden | `products/vergelijkingspanden/` | TRANSDATA | B2B comparable properties tool for agents |
 | Markttendensen      | `products/markttendensen/`      | MT       | B2B market insights dashboard             |
 
 ## Workflow
@@ -32,7 +32,7 @@ When a story is "Ready for Jira":
 1. Use Jira MCP to create the ticket (use project key from table above)
 2. Delete the draft file - Jira is now the single source of truth
 
-**Available issue types:** Epic, Story, Bug, Task, Subtask
+**Available issue types:** Epic, New Feature, Improvement, Bug, Task (see `products/jira-workflow.md` for details)
 
 ### 3. Archiving Completed Stories
 
@@ -68,10 +68,16 @@ Shared context lives in `company/`:
 
 This repo uses MCP servers for direct integration:
 
-| Server    | Purpose           | Usage                                              |
-| --------- | ----------------- | -------------------------------------------------- |
-| **Figma** | Access designs    | Paste Figma frame links in conversations           |
-| **Jira**  | Push/pull stories | Create tickets, query issues, archive done stories |
+| Server            | Purpose           | Usage                                              |
+| ----------------- | ----------------- | -------------------------------------------------- |
+| **Figma**         | Access designs    | Paste Figma frame links in conversations           |
+| **Jira**          | Push/pull stories | Create tickets, query issues, archive done stories |
+| **Confluence**    | Documentation     | Push summaries/reports to Confluence spaces         |
+| **Google Analytics** | Access GA4 data   | Query analytics for Spotto products                |
+
+### Google Analytics
+
+When querying GA4 data, always use the **Spotto - V2** property (ID: `491908260`).
 
 Setup instructions: [docs/mcp-setup.md](docs/mcp-setup.md)
 
