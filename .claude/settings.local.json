@@ -35,7 +35,9 @@
       "mcp__linear__*",
       "mcp__notion__*",
       "mcp__analytics-mcp__*",
-      "mcp__google-search-console__*"
+      "mcp__google-search-console__*",
+      "mcp__freshdesk__*",
+      "mcp__ms-365__*"
     ]
   },
   "enableAllProjectMcpServers": true,
@@ -46,6 +48,8 @@
     "linear",
     "notion",
     "analytics-mcp",
-    "google-search-console"
+    "google-search-console",
+    "freshdesk",
+    "ms-365"
   ]
 }
