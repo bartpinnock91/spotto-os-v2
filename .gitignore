@@ -10,9 +10,12 @@ Thumbs.db
 .vscode/
 *.swp
 
-# Draft data files
+# Data files (drafts, analysis, results)
 products/**/drafts/**/*.csv
 products/**/drafts/**/*.xlsx
+products/**/analysis/**/*.csv
+products/**/analysis/**/*.xlsx
+*.xlsx
 
 # other
 *.mcp.json
