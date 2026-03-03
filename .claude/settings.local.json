@@ -40,7 +40,9 @@
       "mcp__analytics-mcp__*",
       "mcp__google-search-console__*",
       "mcp__freshdesk__*",
-      "mcp__ms-365__*"
+      "mcp__ms-365__*",
+      "Bash(curl -s -H \"Authorization: Bearer P8U4OqzDDZ2v3WU8dyM9x16wwVYV8zX0\" -H \"Accept: application/json\" \"https://cbeapi.be/api/v1/company/0680782524\")",
+      "Bash(python3 -m json.tool)"
     ]
   },
   "enableAllProjectMcpServers": true,
