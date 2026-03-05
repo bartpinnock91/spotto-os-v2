@@ -85,8 +85,7 @@ def build_table(data, property_type):
     return result
 
 
-def add_total_row(tbl, data, property_type):
-    d = data[data["property_type"] == property_type]
+def _summary_row(d, label):
     d_good = d[d["epc_groep"] == "A-D"]["price_value"]
     d_poor = d[d["epc_groep"] == "E/F"]["price_value"]
     n_good = len(d_good)
@@ -98,7 +97,7 @@ def add_total_row(tbl, data, property_type):
     diff_med = med_poor - med_good
     diff_med_pct = (diff_med / med_good) * 100
 
-    total = pd.DataFrame([{
+    return pd.DataFrame([{
         "Mediaan A-D": med_good,
         "Mediaan E/F": med_poor,
         "Verschil mediaan": diff_med,
@@ -109,9 +108,15 @@ def add_total_row(tbl, data, property_type):
         "n A-D": n_good,
         "n E/F": n_poor,
         "n totaal": n_total,
-    }], index=["KUSTBREED"])
+    }], index=[label])
 
-    return pd.concat([tbl, total])
+
+def add_total_row(tbl, data, property_type):
+    d = data[data["property_type"] == property_type]
+    total = _summary_row(d, "KUSTBREED")
+    d_excl = d[d["municipality_name"] != "Knokke-Heist"]
+    excl = _summary_row(d_excl, "KUST EXCL. KNOKKE")
+    return pd.concat([tbl, total, excl])
 
 
 # Build main tables
@@ -156,8 +161,13 @@ if not args.jaar:
         municipalities = sorted(d["municipality_name"].unique())
 
         rows = []
-        for mun in municipalities + ["KUSTBREED"]:
-            dm = d if mun == "KUSTBREED" else d[d["municipality_name"] == mun]
+        for mun in municipalities + ["KUSTBREED", "KUST EXCL. KNOKKE"]:
+            if mun == "KUSTBREED":
+                dm = d
+            elif mun == "KUST EXCL. KNOKKE":
+                dm = d[d["municipality_name"] != "Knokke-Heist"]
+            else:
+                dm = d[d["municipality_name"] == mun]
             row = {}
             for y in years:
                 dy = dm[dm["jaar"] == y]
@@ -189,7 +199,7 @@ if not args.jaar:
                     row["Evol E/F {}".format(y)] = None
             rows.append(row)
 
-        tbl = pd.DataFrame(rows, index=municipalities + ["KUSTBREED"])
+        tbl = pd.DataFrame(rows, index=municipalities + ["KUSTBREED", "KUST EXCL. KNOKKE"])
         tbl.index.name = "Gemeente"
         return tbl
 
