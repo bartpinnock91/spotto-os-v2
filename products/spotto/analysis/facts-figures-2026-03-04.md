@@ -1,6 +1,6 @@
 # Facts & Figures - Spotto Bedrijfsvastgoed
 **Datum query: 4 maart 2026**
-**Bron: ImmoX productie-database (SQL Server)**
+**Bron: ImmoX productie-database (SQL Server) + Databricks (PublicationHits)**
 
 ---
 
@@ -195,7 +195,91 @@
 | 4 | Contactformulier verstuurd | **10.727** |
 | 3 | Publicatie gedeeld | **234** |
 
-**Nota:** Dit zijn platformbrede cijfers (residentieel + bedrijfsvastgoed). Een uitsplitsing per PropertyType was niet haalbaar door de tabelgrootte (~111M rijen). Dit kan later via Databricks opnieuw geprobeerd worden.
+**Nota:** Dit zijn platformbrede cijfers (residentieel + bedrijfsvastgoed).
+
+### PublicationHits bedrijfsvastgoed (Databricks, laatste 12 maanden)
+
+| HitType | Betekenis | Aantal |
+|---------|-----------|--------|
+| 2 | Verschenen in zoekresultaat | **~11.000.000** |
+| 1 | Detailpagina bekeken | **329.000** |
+| 4 | Contactformulier verstuurd | **230** |
+| 3 | Publicatie gedeeld | **9** |
+
+**Aandeel bedrijfsvastgoed in platformtrafiek:** ~10% van impressies, ~5% van detailviews, ~2% van contactformulieren.
+
+### Detailpagina views bedrijfsvastgoed per maand
+
+| Maand | Detail views |
+|-------|-------------|
+| 2025-06 | 14.800 |
+| 2025-07 | ~20.000 |
+| 2025-08 | ~22.000 |
+| 2025-09 | ~25.000 |
+| 2025-10 | ~28.000 |
+| 2025-11 | ~30.000 |
+| 2025-12 | ~27.000 |
+| 2026-01 | ~35.000 |
+| 2026-02 | 37.600 |
+
+**Groeitrend:** van ~14.800 views/maand (jun 2025) naar ~37.600/maand (feb 2026) — consistente opwaartse trend.
+
+### Zoekresultaat-impressies bedrijfsvastgoed per maand
+
+| Maand | Impressies |
+|-------|------------|
+| 2026-01 | 2.800.000 |
+| 2026-02 | 7.200.000 |
+| 2026-03 | 958.000 (maand nog lopend) |
+
+### Conversieratio's: bedrijfsvastgoed vs. residentieel
+
+| Segment | Impressies | Detail views | Contactformulieren | CTR (impressie→view) | Contact% (view→contact) |
+|---------|------------|--------------|--------------------|-----------------------|-------------------------|
+| Bedrijfsvastgoed | ~11M | 329K | 230 | **3,00%** | **0,07%** |
+| Residentieel | ~94M | 5,9M | 10.497 | **6,14%** | **0,18%** |
+
+**Opmerking:** Bedrijfsvastgoed heeft een significant lagere CTR (3% vs. 6,1%) en contactratio (0,07% vs. 0,18%) dan residentieel. Dit is te verwachten: commercieel vastgoed heeft een kleinere, meer gerichte doelgroep. De lagere conversie wijst ook op optimalisatiepotentieel in zoekresultaat-presentatie en detailpagina's.
+
+### Detailviews per pandtype bedrijfsvastgoed
+
+| Pandtype | Detail views | Aandeel |
+|----------|-------------|---------|
+| Commercial (commerciële ruimte) | 121.000 | 37% |
+| Office (kantoor) | 55.000 | 17% |
+| IndustrialWarehouseLogistics (magazijn/logistiek) | 47.000 | 14% |
+| Industrial (industrie) | 41.000 | 12% |
+| TradingPremises (handelspand) | 38.000 | 12% |
+| Catering (horeca) | 20.000 | 6% |
+| CommercialLand (commerciële grond) | 6.000 | 2% |
+
+**Opmerking:** De verdeling van views komt grotendeels overeen met de verdeling van het aanbod. Horeca (6% views vs. 2% aanbod) en magazijn/logistiek (14% views vs. 12% aanbod) trekken verhoudingsgewijs meer aandacht.
+
+### Top 10 gemeenten op detailviews bedrijfsvastgoed
+
+| # | Gemeente | Detail views |
+|---|----------|-------------|
+| 1 | Antwerpen | 20.500 |
+| 2 | Gent | 12.000 |
+| 3 | Hasselt | 10.400 |
+| 4 | Mechelen | 7.100 |
+| 5 | Genk | 5.900 |
+| 6 | Oostende | ~5.000 |
+| 7 | Roeselare | ~4.800 |
+| 8 | Kortrijk | ~4.500 |
+| 9 | Knokke-Heist | ~4.200 |
+| 10 | Brussel | ~4.000 |
+
+**Opmerking:** Vergelijk met de top 10 op aanbod — Genk stijgt van #8 (aanbod) naar #5 (views), wat wijst op hogere vraag dan aanbod. Heist-op-den-Berg (#7 op aanbod) valt weg uit de top 10 op views.
+
+### Detailviews huur vs. koop bedrijfsvastgoed
+
+| Transactietype | Detail views | Aandeel |
+|----------------|-------------|---------|
+| Huur | 173.000 | 53% |
+| Koop | 156.000 | 47% |
+
+**Opmerking:** In het aanbod is de verhouding 59% huur / 40% koop. In de views is het evenwichtiger (53/47%), wat erop wijst dat kooppanden verhoudingsgewijs meer views per publicatie krijgen dan huurpanden.
 
 ### Overige engagement
 
@@ -240,7 +324,7 @@ SELECT COUNT(*) FROM Users
 SELECT COUNT(*) FROM FavoritePublications WHERE Created_On >= DATEADD(MONTH, -12, GETDATE())
 ```
 
-**Nota:** PublicationHits en PublicationSearches zijn te groot om direct te queryen. Voor trafiekdata kan Google Analytics (GA4 property 491908260) geconsulteerd worden.
+**Nota:** PublicationHits werd via Databricks gequeried (sectie 4). Voor aanvullende trafiekdata kan Google Analytics (GA4 property 491908260) geconsulteerd worden.
 
 ---
 

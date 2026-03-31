@@ -17,16 +17,26 @@
 
 ## Platformtrafiek (laatste 12 maanden)
 
-Onderstaande cijfers geven de totale gebruikersinteracties weer op het hele Spotto-platform (residentieel + bedrijfsvastgoed).
+| Interactie | Totaal platform | Bedrijfsvastgoed | Aandeel |
+|------------|-----------------|------------------|---------|
+| Publicaties getoond in zoekresultaten | **105 miljoen** | **11 miljoen** | 10% |
+| Detailpagina's bekeken | **6,2 miljoen** | **329.000** | 5% |
+| Contactformulieren verstuurd | **10.727** | **230** | 2% |
 
-| Interactie | Aantal (12 maanden) |
-|------------|---------------------|
-| Publicaties getoond in zoekresultaten | **105.151.848** |
-| Detailpagina's bekeken | **6.213.058** |
-| Contactformulieren verstuurd | **10.727** |
-| Publicaties gedeeld | **234** |
+Gemiddeld verschijnen publicaties op Spotto meer dan **8,7 miljoen keer per maand** in zoekresultaten. Bedrijfsvastgoed is goed voor **~11 miljoen impressies** en **329.000 detailpagina-views** in het afgelopen jaar.
 
-Gemiddeld verschijnen publicaties op Spotto meer dan **8,7 miljoen keer per maand** in zoekresultaten, en worden er maandelijks meer dan **500.000 detailpagina's** bekeken.
+### Groeitrend detailviews bedrijfsvastgoed
+
+De interesse in bedrijfsvastgoed op Spotto groeit sterk: het aantal detailpagina-views steeg van **~14.800/maand** (juni 2025) naar **~37.600/maand** (februari 2026) — een consistente opwaartse trend.
+
+### Conversie-funnel
+
+| | Bedrijfsvastgoed | Residentieel |
+|---|---|---|
+| CTR (impressie → detailview) | **3,0%** | 6,1% |
+| Contactratio (detailview → lead) | **0,07%** | 0,18% |
+
+Bedrijfsvastgoed heeft een lagere doorklikratio dan residentieel. Dit is inherent aan de markt: commercieel vastgoed heeft een smallere, professionelere doelgroep. Het verschil wijst tegelijk op optimalisatiepotentieel in de presentatie van bedrijfsvastgoed in zoekresultaten.
 
 ---
 
@@ -218,6 +228,29 @@ Dit vertegenwoordigt een belangrijk groeipotentieel voor de zichtbaarheid van he
 
 Het aandeel bedrijfsvastgoed in favorieten (2%) ligt in lijn met het aandeel in contactaanvragen (2,4%), wat duidt op een consistent gebruikerspatroon.
 
+### Meest bekeken pandtypes
+
+| Pandtype | Detailviews | Aandeel |
+|----------|------------|---------|
+| Commerciële ruimte | 121.000 | 37% |
+| Kantoor | 55.000 | 17% |
+| Magazijn & logistiek | 47.000 | 14% |
+| Industrie | 41.000 | 12% |
+| Handelspand | 38.000 | 12% |
+| Horeca | 20.000 | 6% |
+| Commerciële grond | 6.000 | 2% |
+
+Horeca trekt verhoudingsgewijs meer aandacht (6% views vs. 2% aanbod) — een teken van hoge vraag bij beperkt aanbod.
+
+### Huur vs. koop — interesse
+
+| Transactietype | Aanbod | Detailviews |
+|----------------|--------|-------------|
+| Te huur | 59% | 53% |
+| Te koop | 40% | 47% |
+
+Kooppanden krijgen verhoudingsgewijs meer views per publicatie dan huurpanden, wat wijst op een sterkere koopintentie bij bezoekers.
+
 ---
 
-*Bron: Spotto productiedatabase & Google Search Console, 4 maart 2026*
+*Bron: Spotto productiedatabase, Databricks & Google Search Console, 4 maart 2026*
