@@ -1,6 +1,7 @@
 """
-Validate KBO numbers from omnicasa-Q3.csv against CBEAPI.be
-Produces a report with legal status and registered vestigingseenheden.
+Validate KBO numbers from all omnicasa-YYYY-Q#.csv files against CBEAPI.be.
+Produces a single report with legal status and registered vestigingseenheden,
+covering every KBO ever seen across quarters.
 """
 
 import csv
@@ -13,8 +14,9 @@ from pathlib import Path
 
 API_KEY = "P8U4OqzDDZ2v3WU8dyM9x16wwVYV8zX0"
 API_BASE = "https://cbeapi.be/api/v1"
-CSV_PATH = Path(__file__).parent / "omnicasa-Q3.csv"
-OUTPUT_PATH = Path(__file__).parent / "kbo-validation-report.csv"
+DATA_DIR = Path(__file__).parent
+CSV_PATHS = sorted(DATA_DIR.glob("omnicasa-20*-Q*.csv"))
+OUTPUT_PATH = DATA_DIR / "kbo-validation-report.csv"
 
 SUSPECTED_PLACEHOLDER = "0867858802"
 
@@ -70,35 +72,37 @@ def fetch_company(kbo_number: str, max_retries: int = 3) -> dict | None:
 
 
 def main():
-    # 1. Parse CSV and collect unique brokers with their KBO numbers
-    brokers = {}  # kbo -> {names, offices_in_csv, raw_numbers}
+    # 1. Parse all quarter CSVs and collect unique brokers with their KBO numbers
+    brokers = {}  # kbo -> {names, offices_in_csv, raw_numbers, csv_statuses}
     empty_kbo_brokers = []
 
-    with open(CSV_PATH, "r", encoding="utf-8-sig") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            raw = row.get("OrganisationNumber", "").strip()
-            kbo = normalize_kbo(raw)
-            broker_name = row.get("Name", "").strip()
-            office_name = row.get("OfficeName", "").strip()
-            status = row.get("status", "").strip()
+    print(f"Reading {len(CSV_PATHS)} quarter file(s): {[p.name for p in CSV_PATHS]}")
+    for csv_path in CSV_PATHS:
+        with open(csv_path, "r", encoding="utf-8-sig") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                raw = row.get("OrganisationNumber", "").strip()
+                kbo = normalize_kbo(raw)
+                broker_name = row.get("Name", "").strip()
+                office_name = row.get("OfficeName", "").strip()
+                status = row.get("status", "").strip()
 
-            if not kbo or len(kbo) != 10:
-                empty_kbo_brokers.append(broker_name)
-                continue
+                if not kbo or len(kbo) != 10:
+                    empty_kbo_brokers.append(broker_name)
+                    continue
 
-            if kbo not in brokers:
-                brokers[kbo] = {
-                    "names": set(),
-                    "offices_in_csv": [],
-                    "raw_numbers": set(),
-                    "csv_statuses": set(),
-                }
-            brokers[kbo]["names"].add(broker_name)
-            brokers[kbo]["raw_numbers"].add(raw)
-            brokers[kbo]["csv_statuses"].add(status)
-            if office_name:
-                brokers[kbo]["offices_in_csv"].append(office_name)
+                if kbo not in brokers:
+                    brokers[kbo] = {
+                        "names": set(),
+                        "offices_in_csv": [],
+                        "raw_numbers": set(),
+                        "csv_statuses": set(),
+                    }
+                brokers[kbo]["names"].add(broker_name)
+                brokers[kbo]["raw_numbers"].add(raw)
+                brokers[kbo]["csv_statuses"].add(status)
+                if office_name:
+                    brokers[kbo]["offices_in_csv"].append(office_name)
 
     print(f"Unique KBO numbers to validate: {len(brokers)}")
     print(f"Brokers without KBO number: {len(set(empty_kbo_brokers))}")
