@@ -189,31 +189,116 @@
 
 ### PublicationHits (hele platform, laatste 12 maanden)
 
-> **Nota:** Onderstaande PublicationHits data is overgenomen uit het vorige rapport (4 maart 2026) en is niet bijgewerkt. Voor actuele cijfers dient Databricks gequeried te worden.
-
 | HitType | Betekenis | Aantal |
 |---------|-----------|--------|
-| 2 | Verschenen in zoekresultaat | **105.151.848** |
-| 1 | Detailpagina bekeken | **6.213.058** |
-| 4 | Contactformulier verstuurd | **10.727** |
-| 3 | Publicatie gedeeld | **234** |
+| 2 | Verschenen in zoekresultaat | **169.867.114** |
+| 1 | Detailpagina bekeken | **5.939.576** |
+| 4 | Contactformulier verstuurd | **17.030** |
 
-**Nota:** Dit zijn platformbrede cijfers (residentieel + bedrijfsvastgoed).
+**Nota:** Platformbrede cijfers (residentieel + bedrijfsvastgoed), gesommeerd uit de segmentquery. Shared-events niet opgenomen in deze query. Impressies zijn t.o.v. maart-meting (105M) sterk gestegen — waarschijnlijk door gewijzigde tracking/pipeline, niet door organische groei (zie maandtabel hieronder).
 
 ### PublicationHits bedrijfsvastgoed (Databricks, laatste 12 maanden)
 
-> **Nota:** Onderstaande data is overgenomen uit het vorige rapport (4 maart 2026), behalve de huur/koop-uitsplitsing. Voor actuele cijfers dient Databricks gequeried te worden.
-
 | HitType | Betekenis | Aantal |
 |---------|-----------|--------|
-| 2 | Verschenen in zoekresultaat | **~11.000.000** |
-| 1 | Detailpagina bekeken | **329.000** |
-| 4 | Contactformulier verstuurd | **230** |
-| 3 | Publicatie gedeeld | **9** |
+| 2 | Verschenen in zoekresultaat | **18.105.582** |
+| 1 | Detailpagina bekeken | **312.721** |
+| 4 | Contactformulier verstuurd | **375** |
+| 3 | Publicatie gedeeld | **21** |
 
-**Aandeel bedrijfsvastgoed in platformtrafiek:** ~10% van impressies, ~5% van detailviews, ~2% van contactformulieren.
+**Aandeel bedrijfsvastgoed in platformtrafiek:** ~10,7% van impressies, ~5,3% van detailviews, ~2,2% van contactformulieren. Stabiel t.o.v. maart 2026.
 
-### Detailviews huur vs. koop bedrijfsvastgoed (Databricks, bijgewerkt)
+### Detailpagina views bedrijfsvastgoed per maand
+
+| Maand | Detail views |
+|-------|-------------|
+| 2025-04 | 11.368 |
+| 2025-05 | 18.789 |
+| 2025-06 | 14.777 |
+| 2025-07 | 17.146 |
+| 2025-08 | 23.578 |
+| 2025-09 | 27.119 |
+| 2025-10 | 31.262 |
+| 2025-11 | 30.308 |
+| 2025-12 | 28.441 |
+| 2026-01 | 35.185 |
+| 2026-02 | 37.554 |
+| 2026-03 | 36.182 |
+| 2026-04 | 1.012 (maand nog lopend) |
+
+**Groeitrend:** van ~11.400 views/maand (apr 2025) naar ~36.200/maand (mrt 2026) — ruim 3x groei over 12 maanden. Maandelijkse views lijken te plafonneren rond 36-37K sinds jan 2026.
+
+### Zoekresultaat-impressies bedrijfsvastgoed per maand
+
+| Maand | Impressies |
+|-------|------------|
+| 2026-01 | 2.764.852 |
+| 2026-02 | 7.237.584 |
+| 2026-03 | 7.770.210 |
+| 2026-04 | 332.936 (maand nog lopend) |
+
+**Opmerking:** De sprong jan→feb (+162%) en de daaropvolgende stabilisatie rond 7,7M/maand suggereert een wijziging in zoek-/indexeringstracking in februari. Het 12-maanden impressies-totaal (18M) impliceert dat de maanden vóór jan 2026 een veel lager run-rate hadden.
+
+### Conversieratio's: bedrijfsvastgoed vs. residentieel (12 maanden)
+
+| Segment | Impressies | Detail views | Contactformulieren | CTR (impressie→view) | Contact% (view→contact) |
+|---------|------------|--------------|--------------------|-----------------------|-------------------------|
+| Bedrijfsvastgoed | 18.105.582 | 312.721 | 375 | **1,73%** | **0,12%** |
+| Residentieel | 151.761.532 | 5.626.855 | 16.655 | **3,71%** | **0,30%** |
+
+**Opmerking:** CTR is bij beide segmenten lager dan in de maart-meting (BV: 3,00% → 1,73%; res: 6,14% → 3,71%) — grotendeels verklaarbaar door de sterk gestegen impressie-volumes (bredere zoekfunnel). Contactratio bedrijfsvastgoed stijgt juist van 0,07% naar 0,12%, wat wijst op betere conversie op de detailpagina.
+
+### Detailviews per pandtype bedrijfsvastgoed
+
+| Pandtype | Detail views | Aandeel |
+|----------|-------------|---------|
+| Commercial (commerciële ruimte) | 115.646 | 37% |
+| Office (kantoor) | 51.099 | 16% |
+| IndustrialWarehouseLogistics (magazijn/logistiek) | 46.696 | 15% |
+| Industrial (industrie) | 37.593 | 12% |
+| TradingPremises (handelspand) | 36.171 | 12% |
+| Catering (horeca) | 19.321 | 6% |
+| CommercialLand (commerciële grond) | 6.195 | 2% |
+
+**Opmerking:** Verdeling is stabiel t.o.v. maart 2026. Magazijn/logistiek (15% views vs. 11% aanbod) en horeca (6% views vs. 2,5% aanbod) trekken verhoudingsgewijs meer aandacht dan hun aandeel in het aanbod.
+
+### Top gemeenten op detailviews bedrijfsvastgoed
+
+**Datakwaliteit:** De brondata bevat duplicaten met verschillende hoofdletterschrijfwijze ("Antwerpen" + "ANTWERPEN", "Gent" + "GENT", "Mechelen" + "MECHELEN"). Hieronder de top na samenvoeging — de top-30 uit de query werd hierdoor effectief top-27.
+
+| # | Gemeente | Detail views |
+|---|----------|-------------|
+| 1 | Antwerpen | 26.318 |
+| 2 | Gent | 14.560 |
+| 3 | Hasselt | 9.830 |
+| 4 | Mechelen | 8.913 |
+| 5 | Brugge | 5.828 |
+| 6 | Genk | 5.612 |
+| 7 | Oostende | 5.368 |
+| 8 | Roeselare | 4.177 |
+| 9 | Leuven | 4.123 |
+| 10 | Knokke-Heist | 4.006 |
+| 11 | Kortrijk | 3.896 |
+| 12 | Sint-Niklaas | 3.248 |
+| 13 | Waregem | 2.878 |
+| 14 | Sint-Truiden | 2.592 |
+| 15 | Aalst | 2.393 |
+| 16 | Deinze | 2.132 |
+| 17 | Aarschot | 2.113 |
+| 18 | Lier | 2.004 |
+| 19 | Ninove | 1.948 |
+| 20 | Izegem | 1.860 |
+| 21 | Tienen | 1.807 |
+| 22 | Heist-op-den-Berg | 1.799 |
+| 23 | Ieper | 1.747 |
+| 24 | Turnhout | 1.634 |
+| 25 | Maasmechelen | 1.622 |
+| 26 | Maaseik | 1.571 |
+| 27 | Beringen | 1.549 |
+
+**Opmerking:** Brugge schuift door naar #5 (was buiten top 10 in maart). Brussel ontbreekt nu in de top 27 — mogelijk een normalisatie-issue (Brussel splitst mogelijk over gemeenten als Anderlecht/Elsene) of een spellingsvariant die niet in de top-30 viel. Nieuw in de lijst t.o.v. maart: Deinze, Aarschot, Lier, Ninove, Izegem, Tienen, Ieper, Turnhout, Maasmechelen, Maaseik, Beringen.
+
+### Detailviews huur vs. koop bedrijfsvastgoed
 
 | Transactietype | Detail views | Aandeel |
 |----------------|-------------|---------|
@@ -224,7 +309,7 @@
 
 **Totaal: 312.721 detail views**
 
-**Opmerking:** In het aanbod is de verhouding 60% huur / 40% koop. In de views is het evenwichtiger (52/47%), wat erop wijst dat kooppanden verhoudingsgewijs meer views per publicatie krijgen dan huurpanden.
+**Opmerking:** In het aanbod is de verhouding 60% huur / 40% koop. In de views is het evenwichtiger (53/47%), wat erop wijst dat kooppanden verhoudingsgewijs meer views per publicatie krijgen dan huurpanden.
 
 ### Overige engagement
 
@@ -519,4 +604,4 @@ SELECT COUNT(*) FROM FavoritePublications fp JOIN Publications p ON fp.Publicati
 SELECT ci.DataSource, COUNT(DISTINCT c.Id) FROM Customers c JOIN CrmIntegrations ci ON ci.CustomerId = c.Id WHERE c.Status NOT IN (3,4) GROUP BY ci.DataSource
 ```
 
-**Nota:** PublicationHits werd via Databricks gequeried (sectie 4 - niet bijgewerkt, behalve huur/koop uitsplitsing). Voor aanvullende trafiekdata kan Google Analytics (GA4 property 491908260) geconsulteerd worden. Overheidslinks (sectie 5) komen uit Google Search Console en zijn niet bijgewerkt.
+**Nota:** PublicationHits werd via Databricks gequeried (sectie 4 - volledig bijgewerkt op 20 april 2026). Voor aanvullende trafiekdata kan Google Analytics (GA4 property 491908260) geconsulteerd worden. Overheidslinks (sectie 5) komen uit Google Search Console en zijn niet bijgewerkt.

@@ -21,7 +21,7 @@ from collections import defaultdict
 from pathlib import Path
 
 parser = argparse.ArgumentParser()
-parser.add_argument("quarter", nargs="?", default="Q3")
+parser.add_argument("quarter", help="Quarter in YYYY-QN format, e.g. 2026-Q1")
 args = parser.parse_args()
 
 QUARTER = args.quarter

@@ -1,0 +1,858 @@
+================================================================================
+FILE: Reporting Spotto februari 2026.pptx
+================================================================================
+--- Slide 1 ---
+Spotto reporting
+02/2026
+
+--- Slide 2 ---
+Overview
+Wat is nieuw?
+Omgevingsfactoren
+Budgetupdate
+Koopleads & campagnes
+Huurleads & campagnes
+Andere next steps
+Budgetshift koopcampagnes
+Monthly reporting
+
+--- Slide 3 ---
+Wat is nieuw?
+
+--- Slide 4 ---
+1. Aparte reporting tabs voor huren & kopen
+Vlotter huur- en koopleads & campagnes analyseren
+
+--- Slide 5 ---
+1. Aparte reporting tabs voor huren & kopen
+Zowel database als Analytics als Ads data
+
+--- Slide 6 ---
+2. Drop-offcijfers beschikbaar
+Zie makkelijk hoeveel % leads we tracken
+Database leads
+Drop-off
+Google Analytics leads
+
+--- Slide 7 ---
+2. Drop-offcijfers beschikbaar
+In januari was het % gemeten leads verschillend. In februari verwaarloosbaar:
+49% van de huurleads
+52% van de koopleads
+Voor de zekerheid wel de functionaliteit toegevoegd om beide apart te rapporteren
+Wel nog steeds 471 leads op type ‘Onbekend’ (6%)→ Uit de rapportge gelaten
+Een oplossing voor het verschil in % gemeten leads
+
+--- Slide 8 ---
+2. Drop-offcijfers beschikbaar
+Analytics & Ads data toont zo effectieve totaal aantal leads
+Voor
+Na
+
+--- Slide 9 ---
+3. Kanaalgroepering
+To do: afkloppen & algemeen uitrollen
+Een alternatief voor source / medium
+
+--- Slide 10 ---
+3. Kanaalgroepering
+Landingspagina zegt veel over aard van verkeer (& over zoekopdracht)
+Google Search opgesplitst
+
+--- Slide 11 ---
+3. Kanaalgroepering
+En dat zie je in de cijfers. Google organic gemiddeld 0.3% conversieratio op koopleads:
+Company pages zijn voornamelijk branded
+
+--- Slide 12 ---
+3. Kanaalgroepering
+En dat zie je in de cijfers. Direct ligt een pak hoger. Net als de company pages:
+Company pages zijn voornamelijk branded
+
+--- Slide 13 ---
+3. Kanaalgroepering
+En dat zie je in de cijfers. Trendlijn voor koopleads uit direct vs Company pages
+Company pages zijn voornamelijk branded
+Direct
+Company pages
+
+--- Slide 14 ---
+Reporting in Slides
+Visuals & afwisselende lettertypes beter in te stellen
+Via meeting notes + agent toch naar Notion
+Alle actiepunten in het blauw aangeduid
+Alle feedback welkom! Spotto template bijvoorbeeld?
+Betere visualisatiemogelijkheden dan Notion
+
+--- Slide 15 ---
+Omgevingsfactoren
+
+--- Slide 16 ---
+Spotto Brand uitgesloten
+Branded search + partners uitgesloten
+21 januari uitgevoerd, dus volle impact is pas zichtbaar in februari
+Verwachte daling:
+Huren: 11%
+Kopen: 17%
+Leads verschuiven naar Organic
+
+--- Slide 17 ---
+Februari heeft 10% minder dagen
+28 dagen = 10% minder dagen dan 31 dagen
+Grofweg:
+Metric: Leads per dag? Werkt niet waterdicht, levert extra technisch werk op & langere laadtijden van het dashboard
+Bij elke evolutie: 10% bijtellen
+  TABLE: Gerapporteerde evolutie | Effectieve evolutie
+  TABLE: -10% | 0%
+  TABLE: +20% | +30%
+  TABLE: 0% | +10%
+
+--- Slide 18 ---
+Februari heeft 10% minder dagen
+Zou een beter beeld geven
+Enkele belangrijke nadelen
+Werkt niet waterdicht
+Levert extra technisch werk op bij elk rapport
+Langere laadtijden van het dashboard
+Vooral een issue in februari vs januari, andere maanden minder invloed
+Beslissen: leads per dag gebruiken of niet?→ Advies: als lage prio task toevoegen. Evidenter met BigQuery.
+Kunnen we met ‘Leads per dag’ werken?
+
+--- Slide 19 ---
+Budget
+
+--- Slide 20 ---
+Budget
+TikTok budget ontbreekt
+Microsoft Ads spend ontbreekt→ Toegang Tijs Microsoft Ads verifiëren
+Live overzicht - Data onvolledig
+
+--- Slide 21 ---
+Huurleads & campagnes
+
+--- Slide 22 ---
+Rent trend
+12% minder volume
+Ook 10% minder dagen, dus trend loopt gelijk
+
+--- Slide 23 ---
+Spotto Brand uitgesloten
+Branded search + partners uitgesloten
+21 januari uitgevoerd, dus volle impact is pas zichtbaar in februari
+Verwachte daling van 11% op huren
+Leads verschuiven naar Organic
+
+--- Slide 24 ---
+Een gemiddelde maand voor huren
+
+--- Slide 25 ---
+Globaal
+Stabiel, met duidelijke verschillen
+
+--- Slide 26 ---
+Search - Paid
+Zakt zoals verwacht
+
+--- Slide 27 ---
+Search - Company (mainly branded)
+Stijgt niet zoals verwacht, maar relatief instabiel
+
+--- Slide 28 ---
+Marketplaces
+Brengt de redding (100% Rentumo)
+
+--- Slide 29 ---
+Property searches
+Ook lichte stijging, maar vooral eerdere dip
+
+--- Slide 30 ---
+Google Ads
+Algemene daling, behalve Oost-Vlaanderen
+
+--- Slide 31 ---
+Google Ads
+Maar: stijging bij goedkope CPL = probleem?
+
+--- Slide 32 ---
+Google Ads
+Tussendoor
+Potentiële vraag: Kunnen we het pijltje bij de stijging van leads groen maken en bij de stijging van kost per lead rood maken?
+Dat kan in één tabel jammer genoeg niet.
+
+--- Slide 33 ---
+Google Ads
+Cijfers huurleads
+Kunnen we een van deze bepalen om tegenover af te toetsen?
+→ Eerst analyse van fluctuaties nodig om goede KPI te bepalen.→ Verdere afwegingen: zie later (bij analyse koopleads)
+
+--- Slide 34 ---
+Google Ads Vlaams-Brabant
+Waarom is de kost per lead hier 60% boven gemiddelde?
+Zeer duidelijke verklaring voor! Als we vergelijken met best presterende provincie (WVL):
+SIS exact ligt 100% hoger = we bieden veel competitiever
+CPC ligt 130% hoger = we betalen dus veel meer per click
+Sidenote: CR ligt wél 10% hoger, maar WVL & VLB zijn de 2 slechtste op dat gebied
+
+--- Slide 35 ---
+Google Ads Vlaams-Brabant
+Waarom bieden we zo competitief?
+Vlaams-Brabant: 5 actieve* ad groups (Leuven & Vilvoorde)
+West-Vlaanderen: 12 actieve ad groups
+* Actief = met spend in februari
+
+--- Slide 36 ---
+Google Ads Vlaams-Brabant
+Waarom bieden we zo competitief?
+Budget is véél meer gespreid in WVL dan in VLB
+Actie bepalen
+Budget verlagen op VLB (geen optie vermoedelijk)
+Drempel voor actieve ad group verlagen= adverteren als we minder panden hebben
+Of: technische issue? Zijn er andere gemeentes die wel genoeg panden hebben maar niet verschijnen?
+Link met budgetoefening Jantien per provincie
+
+--- Slide 37 ---
+Google Ads Antwerpen?
+Gelijkaardig verhaal
+CPL 20% boven gemiddelde
+Hogere SIS
+Hogere CPC
+2 actieve ad groups (Antwerpen & Mechelen)
+Ook hier: drempel verlagen?
+
+--- Slide 38 ---
+Huurcampagnes vs huurleads
+Genereren huurcampagnes ook huurleads?
+Ja!
+99% van de leads zijn huurleads (571 van de 578)
+
+--- Slide 39 ---
+Koopleads & campagnes
+
+--- Slide 40 ---
+Buy trend
+4% minder volume
+Ook 10% minder dagen, dus trend loopt relatief gelijk
+
+--- Slide 41 ---
+Spotto Brand uitgesloten
+Branded search + partners uitgesloten
+21 januari uitgevoerd, dus volle impact is pas zichtbaar in februari
+Verwachte daling van 17% op kopen
+Leads verschuiven naar Organic
+
+--- Slide 42 ---
+Koopleads
+*Na een spectaculaire maand januari
+Een gemiddelde maand
+
+--- Slide 43 ---
+Tracking januari blijft issue
+Waarom? Alle andere maanden zijn ongeveer 52% tracked. Januari 34%. Voorlopig nog geen verklaring. Evoluties met korreltje zou nemen.
+30% drop in database, maar geen drop in GA
+
+--- Slide 44 ---
+Koopleads
+Globaal stabiel, kleine verschillen tussen kanalen
+
+--- Slide 45 ---
+Koopleads
+Opvallend: Search - Paid amper 17% van het totaal (tov 29% bij huren)
+
+--- Slide 46 ---
+Search - Property overview
+Stijgt voor de tweede maand op rij
+
+--- Slide 47 ---
+Direct
+Ook een mooie stijging
+
+--- Slide 48 ---
+Search - Paid
+Zakt minder dan verwacht
+
+--- Slide 49 ---
+Property searches
+Lichte daling over 5 maanden, goede maand januari
+
+--- Slide 50 ---
+Search - Company (mainly branded)
+Recordmaand, ruim beter dan het gemiddelde
+
+--- Slide 51 ---
+Google Ads
+Algemene daling, behalve Oost-Vlaanderen & Nationaal
+Maar…
+
+--- Slide 52 ---
+Huurcampagnes vs huurleads
+Genereren koopcampagnes ook koopleads?
+Niet altijd
+Slechts 67% van de leads zijn koopleads (91 van de 136)
+
+--- Slide 53 ---
+Huurcampagnes vs huurleads
+Genereren koopcampagnes ook koopleads?
+1 enkel keyword zorgt voor het grootste deel: ‘huis zoeken’ (sinds september)
+→ €1.000 kosten
+
+--- Slide 54 ---
+Huurcampagnes vs huurleads
+Hoe lossen we dat op?
+Enkel dat keyword uitschakelen niet robuust genoeg, kan nog gebeuren
+Koop- en huurleads apart naar Google Ads sturen & campagnes daar specifiek op laten draaien
+
+--- Slide 55 ---
+Andere next steps
+
+--- Slide 56 ---
+Uitbreiding KPI
+Cijfers februari:
+3674 leads = property_form_submit+ 3947 property question_form_submit → uitbreiding van +100%+ 1860 property_belmakelaar_click → uitbreiding van +50%
+Question form submit & ‘Bel makelaar’ click
+
+--- Slide 57 ---
+Uitbreiding KPI
+Zijn die extra conversies in verhouding met effectieve (kwalitatieve) leads?
+Kennen we waarde toe? Bijvoorbeeld:
+Property_form_submit = 100
+Property_question_form_submit = 50
+Property_belmakelaar_click = 10
+→ Zo onderbouwd mogelijk doen! → Ideaal scenario: CR% van lead naar koper (data makelaars)
+Afkloppen: doen we dit? Obv welke parameters? Welk research nodig?
+Relevantie?
+
+--- Slide 58 ---
+User ID Tracking
+Hoeveel mensen loggen in op Spotto?
+User ID > Cookie ID
+Mensen ∞ meten (op elke ingelogde interactie)
+Tracking zéér eenvoudig op te zetten
+Prioriteit beslissen
+Langduriger tracken van ingelogde gebruikers
+
+--- Slide 59 ---
+(not set) Leads
+Bart & Tijs: volgende stappen afspreken
+Nog steeds aanwezig
+
+--- Slide 60 ---
+Google Ads conversies bijsturen
+Vlieg 1: Huurleads maar één keer tellen, koopleads allemaal
+Vlieg 2: Doelstellingen campagnes aanpassen naar transaction type
+2 vliegen in één klap
+
+--- Slide 61 ---
+Google Ads conversies bijsturen
+Next step: GSC data visualiseren via deze databron
+Te bepalen: prioriteit van deze task
+Google Search Console is aan BigQuery gelinkt
+
+--- Slide 62 ---
+Vlaamse regio’s in keywordlijst opnemen
+Te bepalen: prioriteit van deze task
+We doen nog niets met regio’s
+
+--- Slide 63 ---
+Kustgemeentes op apart budget
+Belangrijk: aandeel provinciecampagnes zal zakken sinds update 21 januari waarin we alle andere plaatsnamen hebben uitgesloten. Maar: nog niet genoeg data.
+Hoeveel spenderen we nu in Kustgemeentes?
+
+--- Slide 64 ---
+Retargetingcampagne
+Enkel data februari/maart te interpreteren:
+Evalueren: wat is het doel van deze campagne? & Daarna campagne bijsturen
+Blijft laag in ratio clicks / sessies
+
+--- Slide 65 ---
+Budgetshift koopcampagnes
+
+--- Slide 66 ---
+Budgetverschuiving naar koopcampagnes
+Source of truth bepalen
+KPI bepalen
+Analyse huidige CPA
+Simulatie
+Aparte meeting voor inplannen, vandaag eerste verkenning.
+Hoeveel extra koopleads zou extra bugdet opleveren?
+
+--- Slide 67 ---
+Budgetverschuiving naar koopcampagnes
+Google Ads Conversie uit koopcampagne ≠ goede input voor KPI
+33% huurleads die cijfer inflaten
+Modeled conversions (black box)
+Overlap met conversies in andere platformen
+Source of truth
+
+--- Slide 68 ---
+Budgetverschuiving naar koopcampagnes
+Richtcijfer voor optimalisaties, cfr. Huurleads
+Idealiter
+Rendabiliteit op Google Ads-niveau (bv. €15 CPA)
+Volume op bedrijfsniveau (bv. 8000 per jaar)
+Eerste prioriteit bepalen: rendabiliteit of volume?
+Rendabiliteit = we adverteren niet voorbij de CPA, volume secundair
+Volume = we adverteren ook wanneer CPA hoger ligt, CPA secundair
+Beide gevallen: optimaliseren van beide aspecten
+KPI bepalen voor budgetallocatie
+
+--- Slide 69 ---
+Budgetverschuiving naar koopcampagnes
+Alternatief voor één cijfer:
+Maximum = ingrijpen als het dit overschrijdt
+Meerdere punten: groen/geel/rood
+KPI bepalen voor budgetallocatie
+
+--- Slide 70 ---
+Budgetverschuiving naar koopcampagnes
+Periode: 1 september - 8 maart:
+1200 koopleads (obv Google Analytics & 50% tracked)
+€15 000 kosten
+€12.50 per kooplead
+Huidige CPA kooplead (Regionale campagnes)
+
+--- Slide 71 ---
+Budgetverschuiving naar koopcampagnes
+Simulaties - Hoeveel leads in totaal? Aan welke CPA?
+  TABLE:  | Leads | Cost | CPA
+  TABLE: Budget 100% | 1,367 | €19,217 | €14
+  TABLE: Budget +50% | 1,695 | €28,826 | €17
+  TABLE: Budget +100% | 1,967 | €38,435 | €20
+  TABLE: Budget +150% | 2,233 | €48,043 | €22
+  TABLE:  | LIM |  | VLB |  | WVL |  | OVL |  | ANT | 
+  TABLE:  | Leads | CPA | Leads | CPA | Leads | CPA | Leads | CPA | Leads | CPA
+  TABLE: Budget 100% | 313 | €9 | 327 | €9 | 201 | €15 | 264 | €11 | 262 | €10
+  TABLE: Budget +50% | 397 | €11 | 393 | €12 | 238 | €18 | 336 | €13 | 332 | €13
+  TABLE: Budget +100% | 461 | €13 | 444 | €14 | 284 | €21 | 390 | €15 | 389 | €15
+  TABLE: Budget +150% | 526 | €15 | 494 | €15 | 322 | €23 | 444 | €17 | 448 | €16
+
+--- Slide 72 ---
+Budgetverschuiving naar koopcampagnes
+Simulatie - Hoeveel meer leads voor meer budget?
+  TABLE: Leads? | Gemiddeld
+  TABLE: Budget +50% | 24%
+  TABLE: Budget +100% | 44%
+  TABLE: Budget +150% | 63%
+  TABLE: Leads? | LIM | VLB | WVL | OVL | ANT | Gemiddeld
+  TABLE: Budget +50% | 27% | 20% | 18% | 27% | 27% | 24%
+  TABLE: Budget +100% | 47% | 36% | 41% | 48% | 48% | 44%
+  TABLE: Budget +150% | 68% | 51% | 60% | 68% | 71% | 63%
+
+================================================================================
+FILE: Reporting Spotto maart 2026.pptx
+================================================================================
+--- Slide 1 ---
+Spotto reporting
+03/2026
+
+--- Slide 2 ---
+Overview
+Wat is nieuw?
+Omgevingsfactoren
+Budgetupdate
+Koopleads & campagnes
+Huurleads & campagnes
+Monthly reporting
+
+--- Slide 3 ---
+Wat is nieuw?
+
+--- Slide 4 ---
+Wat is nieuw?
+Maart: vooral gefocust op to do lijst & prioriteiten
+April: optimalisatiemaand
+Deze maand geen grote updates
+
+--- Slide 5 ---
+Omgevingsfactoren
+
+--- Slide 6 ---
+Februari heeft 10% minder dagen
+31 dagen van maart = 10% minder dagen dan 28 dagen van februari
+Grofweg:
+Bij elke evolutie: 10% aftrekken
+  TABLE: Gerapporteerde evolutie | Effectieve evolutie
+  TABLE: -10% | 0%
+  TABLE: +20% | +30%
+  TABLE: 0% | +10%
+
+--- Slide 7 ---
+Budget
+
+--- Slide 8 ---
+Budgetdalingen
+Plan: budget op conversiecampagnes verminderen voor ruimte op awareness campagnes
+10% verminderd op 2 maart, 9 maart & 16 maart
+Door grote drop in leads, de volgende 2 geplande dalingen geschrapt
+20% minder spend
+
+--- Slide 9 ---
+Budget
+TikTok & Meta Ads budget ontbreekt
+Bing Ads heeft voorlopig geen apart budget
+Totale spend onder budget:
+Budgetoverzicht
+
+--- Slide 10 ---
+Budget
+We spenderen meer dan gepland aan conversie→ Acquisitie & retentie-ads nog niet klaar
+Budget herplannen?
+Per KPI
+
+--- Slide 11 ---
+Budget
+Budget verplaatsen van Google?
+Of nieuw budget?
+Hoeveel: afhankelijk van prestatie-analyse
+Bing nog geen budget
+
+--- Slide 12 ---
+Huurleads & campagnes
+
+--- Slide 13 ---
+Rent trend
+Trend loopt gelijk
+6% meer volume maar ook  10% meer dagen.
+
+--- Slide 14 ---
+Een gemiddelde maand voor huren
+Lichte stijging in leads
+
+--- Slide 15 ---
+Globaal
+Organic compenseert ruimschoots de daling in Paid
+
+--- Slide 16 ---
+Search - Organic
+Stijgt naar een nieuw record
+
+--- Slide 17 ---
+Search - Paid
+Zakt minder dan verwacht (-20% spend, -8% leads)
+Belangrijk: in januari pas Branded uitgesloten, de daling in leads betekent daar niet effectief minder leads.
+
+--- Slide 18 ---
+Marketplaces (Rentumo)
+Eerdere stijging blijft aan
+
+--- Slide 19 ---
+Direct & company
+Ook hier recordmaand
+
+--- Slide 20 ---
+Koopleads & campagnes
+
+--- Slide 21 ---
+Buy trend
+Trend loopt gelijk
+7% meer volume maar ook  10% meer dagen.
+
+--- Slide 22 ---
+Koopleads
+20% minder leads per dag = bedrag van daling in paid search budget
+10% minder leads
+
+--- Slide 23 ---
+Tracking januari blijft issue
+Anders: vertekend gemiddelde.
+Kan de database nog cleaned worden in januari?
+
+--- Slide 24 ---
+Koopleads
+Globale drop van 20% leads per dag
+
+--- Slide 25 ---
+Search - Organic
+Daalt licht, maar nog steeds beter dan Q4
+
+--- Slide 26 ---
+Search - Paid
+Daalt meer dan de bugetdaling
+23% minder leads, maar ook 10% meer dagen = 30% minder leads per dag. Daling in alle campagnes.
+
+--- Slide 27 ---
+Direct & company
+Daling na recordmaand, maar gemiddelde maand
+23% minder leads, maar ook 10% meer dagen = 30% minder leads per dag. Daling in alle campagnes.
+
+--- Slide 28 ---
+Notifications
++109% conversieratio!! Zijn er aanpassingen gebeurd?
+Opvallend: +144% deze maand
+
+================================================================================
+FILE: Reporting Spotto Q1 + april 2026.pptx
+================================================================================
+--- Slide 1 ---
+Spotto reporting
+Q1 + 04/2026
+
+--- Slide 2 ---
+Overview
+Operationeel: wat is er gebeurd?
+Omgevingsfactoren
+Budgetupdate
+Koopleads & campagnes
+Huurleads & campagnes
+Andere analyses
+Volgende stappen
+Kwartaalreporting
+
+--- Slide 3 ---
+Operationeel
+Wat is er van werk gebeurd?
+
+--- Slide 4 ---
+Grote opkuis negatives
+Accounthygiëne verbeterd: alles in negative lijsten met duidelijke omschrijving & target campaigns(+ Nederlandse plaatsnamen & plaatsnamen buiten de provincie uitgesloten)
+
+--- Slide 5 ---
+Branded search uitgesloten
+We betalen niet langer voor ‘Spotto’ clicks & attribueren ze niet langer verkeerd
+
+--- Slide 6 ---
+Partners uitgesloten
+We concurreren niet langer met partners op hun eigen naam
+
+--- Slide 7 ---
+Kanaalgroepering
+Een alternatief voor source / medium
+
+--- Slide 8 ---
+Koop & huurleads tracking opgesplitst
+Google Ads & Analytics: gerichter aansturen & rapporteren
+
+--- Slide 9 ---
+Test met threshold lager op locatie ad groups
+Ook locaties met minder panden promoten om meer ad groups per provincie te hebben & CPC’s te verlagen
+
+--- Slide 10 ---
+Kleurgebruik aangepast
+Duidelijker onderscheid tussen de metrics
+Nota: reportingtabs nog niet geüpdate (sorry!)
+
+--- Slide 11 ---
+Verschillende andere updates aan het dashboard
+Vlotter huur- en koopleads & campagnes analyseren
+
+--- Slide 12 ---
+Omgevingsfactoren
+Wat heeft een impact op de cijfers?
+
+--- Slide 13 ---
+Spotto Brand uitgesloten
+Branded search + partners uitgesloten
+21 januari uitgevoerd
+Verwachte daling:
+Huren: 11%
+Kopen: 17%
+Leads verschuiven naar Organic
+
+--- Slide 14 ---
+Februari heeft 10% minder dagen
+31 dagen van maart = 10% minder dagen dan 28 dagen van februari
+Grofweg:
+Maar: weinig tot geen impact tussen Q4 & Q1 (2.1% minder dagen in Q1)
+Bij elke evolutie: 10% aftrekken
+  TABLE: Gerapporteerde evolutie | Effectieve evolutie
+  TABLE: -10% | 0%
+  TABLE: +20% | +30%
+  TABLE: 0% | +10%
+
+--- Slide 15 ---
+Budgetdaling conversiecampagenes
+3x 10% verlaagd, daarna stopgezet
+
+--- Slide 16 ---
+Ook gemeentes met minder panden geadverteerd
+Op 10 april doorgevoerd
+
+--- Slide 17 ---
+Ook gemeentes met minder panden geadverteerd
+Geen grote stijging in aantal ad groups
+Waarom? Er zijn nu al postcodes met 20+ panden die niet geadverteerd worden
+Ad group niet aangemaakt door wisselende plaatsnaam→ Bv. 9120
+Ad copy niet voorzien door te lange plaatsnaam= input geweigerd door Google→ Bv 9300
+Later meer hierover
+Impact van update is beperkt
+
+--- Slide 18 ---
+Budget
+
+--- Slide 19 ---
+Budget
+Budgetoverzicht
+
+--- Slide 20 ---
+Budget
+We spenderen meer dan gepland aan conversie→ Acquisitie & retentie-ads nog niet klaar
+Budget herplannen?
+Per KPI
+
+--- Slide 21 ---
+Budget
+Vooral meta: nog maar 42% van budget gespendeerd
+Ook Google & Bing lopen achter
+Ruim onder budget
+
+--- Slide 22 ---
+Budgetdalingen
+Plan: budget op conversiecampagnes verminderen voor ruimte op awareness campagnes
+10% verminderd op 2 maart, 9 maart & 16 maart
+Door grote drop in leads, de volgende 2 geplande dalingen geschrapt
+20% minder spend
+
+--- Slide 23 ---
+Huurleads & campagnes
+Tabellen: Q1
+Tijdlijnen: telkens april ook meegenomen
+
+--- Slide 24 ---
+Hoe staan we tegenover de target?
+Exact op de target
+
+--- Slide 25 ---
+Rent trend
+Lichte stijging tov Q4, 14% minder volume dan vorig jaar
+
+--- Slide 26 ---
+Stabiele cijfers dit kwartaal
+1% stijging
+
+--- Slide 27 ---
+Globaal
+Organic compenseert exact de daling in Paid
+
+--- Slide 28 ---
+Search - Organic
+Stijgt naar een nieuw record
+
+--- Slide 29 ---
+Search - Organic
+Property overviews trekken het gemiddelde omhoog
+= Zoekopdrachten naar ‘huis te huur Gent’ en dergelijke.
+
+--- Slide 30 ---
+Search - Paid
+Zakt minder dan verwacht (-36% spend, -13% leads*)
+*Eigenlijk 23%, maar ~10% daling komt door uitsluiten branded search
+
+--- Slide 31 ---
+Marketplaces (Rentumo)
+Eerdere stijging blijft aan
+
+--- Slide 32 ---
+Direct & company
+Stijging van 16%. Uitsluiten branded SEA vermoedelijk deel van de oorzaak.*
+*Maar: zowel direct als brand pages zijn +16%, dus zeker niet enige factor! Andere OOO of push campagnes in deze periode?
+
+--- Slide 33 ---
+Koopleads & campagnes
+
+--- Slide 34 ---
+Hoe staan we tegenover de target?
+20% onder target + inflated cijfers januari
+
+--- Slide 35 ---
+Buy trend
+Stabiel tov Q4, 22% minder volume dan vorig jaar
+
+--- Slide 36 ---
+Koopleads
+10% meer leads (Google Analytics)
+
+--- Slide 37 ---
+Tracking januari blijft issue
+Kan de database nog cleaned worden?
+Cijfers database niet bruikbaar door inflation januari:
+
+--- Slide 38 ---
+Koopleads
+Globale stijging van 10%
+
+--- Slide 39 ---
+Search - Organic
++30% omhoog
+
+--- Slide 40 ---
+Search - Organic
+Property overviews trekken het gemiddelde omhoog
+= Zoekopdrachten naar ‘huis te koop Gent’ en dergelijke.
+
+--- Slide 41 ---
+Search - Organic - Property overview
+Duurzame stijging in Q1, piek in februari
+
+--- Slide 42 ---
+Search - Paid
+-30% leads bij -52% spend*
+*Terwijl er een verwachte daling van -17% was door verschuiven branded search!
+
+--- Slide 43 ---
+Search - Paid
+Grotere bugdetdaling in december bij kopen. Herverdelen?
+
+--- Slide 44 ---
+Direct & company
++18% op direct, +85% op company pages
++85% op brand pages = deels door uitsluiten branded SEA. Andere OOO of push campagnes in deze periode?
+
+--- Slide 45 ---
+Andere analyses
+
+--- Slide 46 ---
+Adchieve aansturing werkt niet 100%
+2 voorbeelden:
+Appartement-Te huur-Beveren-kruibeke-zwijndrecht (9120) krijgt geen RSA→ Te lange plaatsnaam?
+Aalst heeft geen actieve ads voor huren, maar wel 20+ panden→ Wijzigende plaatsnaam in database?
+Oplossing voor beide: hoofdplaatsnaam voorzien?
+Fouten gevonden, samen met Bart te evalueren
+
+--- Slide 47 ---
+Adchieve aansturing werkt niet 100%
+Database vs Google Ads:
+Postcodes huurpanden met +20 panden
+  TABLE: Postcode | Aantal
+  TABLE: 9000 | 51
+  TABLE: 9120 | 28
+  TABLE: 9200 | 25
+  TABLE: 9300 | 22
+  TABLE: 9700 | 21
+  TABLE: 9100 | 20
+Geen ad copy
+
+--- Slide 48 ---
+Immosite campagne loopt niet gericht
+Januari-april
+€5.98 naar zoektermen rond ‘platform’, ‘website’
+€2268 naar varia
+Appartement te huur
+Huis te huur
+Te huur
+Te huur Gent
+Oplossing: camapgne sterk vernauwen & op laag pitje laten draaien OF afzetten
+Bijna geen zoektermen zoals beoogd
+
+--- Slide 49 ---
+Volgende stappen
+
+--- Slide 50 ---
+Volgende stappen
+Google Ads
+Campagnes koopleads gerichter aansturen
+KPI bepalen rond CPA (groei & efficiëntiedoelstellingen)
+Awarenesscampagnes met content
+Retentioncampagnes met retargeting
+Kustgemeentes apart bugdet + regio nieuwe budgetverdeling
+→ Meer duiding: Notion & vorige reportings
+Prioriteit bepalen
+
+--- Slide 51 ---
+Volgende stappen
+Analytics
+(not set) leads bug
+“Aantal resultaten” toevoegen aan property_overview_pageview
+Oorsprong bezoeker in CRM capteren
+‘Oeps, verkocht’ tracken
+User ID tracken → veel logins?
+→ Meer duiding: Notion & vorige reportings
+Prioriteit bepalen
