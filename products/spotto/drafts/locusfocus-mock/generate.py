@@ -1,11 +1,11 @@
-"""Generate LocusFocus mock feed from the latest commercials CSV in input/.
+"""Generate LocusFocus feed from the latest commercials CSV in input/.
 
-Output: output/feed_<today>.json containing 1000 properties with publication arrays.
+Output: output/feed_<today>.json containing all commercial properties with
+publication arrays.
 """
 import csv
 import hashlib
 import json
-import random
 import re
 from collections import defaultdict
 from datetime import date
@@ -15,9 +15,6 @@ from statistics import median
 SCRIPT_DIR = Path(__file__).parent
 INPUT_DIR = SCRIPT_DIR / "input"
 OUTPUT_DIR = SCRIPT_DIR / "output"
-
-NUM_CASES = 1000
-RANDOM_SEED = 42
 
 # Per LocusFocus spec: PropertyType IN (4, 7, 9, 10, 11, 12, 13, 14)
 COMMERCIAL_TYPES = {4, 7, 9, 10, 11, 12, 13, 14}
@@ -194,9 +191,8 @@ def has_future_available_from(prop):
     )
 
 
-def stratified_sample(properties, n, rng):
-    """Pick all edge-case properties first, then random fill to n."""
-    edge_filters = [
+def edge_case_counts(properties):
+    filters = [
         ("property_type_conflict", lambda p: is_conflict(p, "property_type")),
         ("transaction_type_conflict", lambda p: is_conflict(p, "transaction_type")),
         ("price_type_conflict", lambda p: is_conflict(p, "price_type")),
@@ -204,23 +200,7 @@ def stratified_sample(properties, n, rng):
         ("per_sqm", has_per_sqm),
         ("future_available_from", has_future_available_from),
     ]
-    selected = {}
-    counts = {}
-    for label, f in edge_filters:
-        c = 0
-        for p in properties:
-            if f(p) and p["property_id"] not in selected:
-                selected[p["property_id"]] = p
-                c += 1
-        counts[label] = c
-
-    remaining = [p for p in properties if p["property_id"] not in selected]
-    rng.shuffle(remaining)
-    while len(selected) < n and remaining:
-        p = remaining.pop()
-        selected[p["property_id"]] = p
-
-    return list(selected.values())[:n], counts
+    return {label: sum(1 for p in properties if f(p)) for label, f in filters}
 
 
 def main():
@@ -240,15 +220,11 @@ def main():
 
     properties = [build_property(grp) for grp in by_addr.values()]
     print(f"  {len(properties)} unique properties")
-
-    rng = random.Random(RANDOM_SEED)
-    sample, counts = stratified_sample(properties, NUM_CASES, rng)
-    print(f"  edge-case seeds: {counts}")
-    print(f"  sampled {len(sample)} cases")
+    print(f"  edge-case counts: {edge_case_counts(properties)}")
 
     out = OUTPUT_DIR / f"feed_{date.today().isoformat()}.json"
     with out.open("w", encoding="utf-8") as f:
-        json.dump({"properties": sample}, f, ensure_ascii=False, indent=2)
+        json.dump({"properties": properties}, f, ensure_ascii=False, indent=2)
     print(f"Wrote {out}")
 
 
