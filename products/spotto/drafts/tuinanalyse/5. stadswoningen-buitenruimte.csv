@@ -1,0 +1,13 @@
+outdoor_space,listing_season,total_listings,median_days,avg_days,p25_days,p75_days
+1. Has Garden,Spring,495,81,120.9,30,170
+1. Has Garden,Summer,389,89,118.3,38,164
+1. Has Garden,Autumn,434,64,102.8,30,142
+1. Has Garden,Winter,317,82,123.8,36,170
+2. Terrace Only,Spring,250,88,133.5,37,202
+2. Terrace Only,Summer,210,76,117.6,35,162
+2. Terrace Only,Autumn,195,74,115.7,34,157
+2. Terrace Only,Winter,172,77,120.3,37,174
+3. Neither,Spring,98,122,160.2,51,233
+3. Neither,Summer,77,81,121.3,51,165
+3. Neither,Autumn,65,114,148.2,67,196
+3. Neither,Winter,62,95,130.4,41,179

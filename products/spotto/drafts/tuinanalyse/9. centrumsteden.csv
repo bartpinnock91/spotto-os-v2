@@ -1,0 +1,27 @@
+stad,garden_group,total_listings,median_days,p25_days,p75_days
+Aalst,No Garden,185,122,51,196
+Aalst,Wide Garden,804,89,35,158
+Antwerpen,No Garden,394,117,51,222
+Antwerpen,Wide Garden,2123,67,31,147
+Brugge,No Garden,121,92,44,243
+Brugge,Wide Garden,585,74,35,172
+Genk,No Garden,39,41,24,125
+Genk,Wide Garden,426,70,30,157
+Gent,No Garden,426,79,32,164
+Gent,Wide Garden,1317,48,21,120
+Hasselt,No Garden,63,118,31,218
+Hasselt,Wide Garden,604,75,28,169
+Kortrijk,No Garden,136,110,43,206
+Kortrijk,Wide Garden,621,64,27,158
+Leuven,No Garden,48,69,30,130
+Leuven,Wide Garden,397,50,20,137
+Mechelen,No Garden,108,100,38,186
+Mechelen,Wide Garden,410,51,23,134
+Oostende,No Garden,59,103,46,202
+Oostende,Wide Garden,289,69,32,153
+Roeselare,No Garden,70,127,70,268
+Roeselare,Wide Garden,465,92,39,176
+Sint-Niklaas,No Garden,74,96,42,191
+Sint-Niklaas,Wide Garden,445,63,28,132
+Turnhout,No Garden,24,173,81,218
+Turnhout,Wide Garden,205,125,66,230

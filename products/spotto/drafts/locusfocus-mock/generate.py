@@ -4,7 +4,6 @@ Output: output/feed_<today>.json containing all commercial properties with
 publication arrays.
 """
 import csv
-import hashlib
 import json
 import re
 from collections import defaultdict
@@ -52,21 +51,6 @@ def to_int(v):
 def to_float(v):
     v = clean(v)
     return float(v) if v is not None else None
-
-
-def normalize_address(r) -> str:
-    parts = [
-        clean(r.get("street_name")) or "",
-        clean(r.get("house_number")) or "",
-        clean(r.get("box_number")) or "",
-        clean(r.get("postcode")) or "",
-        clean(r.get("municipality_name")) or "",
-    ]
-    return "|".join(p.strip().lower() for p in parts)
-
-
-def property_id(r) -> str:
-    return hashlib.sha256(normalize_address(r).encode("utf-8")).hexdigest()
 
 
 def display_address(r) -> str:
@@ -151,7 +135,7 @@ def build_property(group_rows):
     sample = group_rows[0]
 
     return {
-        "property_id": property_id(sample),
+        "address_key": sample["address_key"],
         "address": display_address(sample),
         "lat": lat,
         "lng": lng,

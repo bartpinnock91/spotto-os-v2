@@ -17,5 +17,8 @@ products/**/analysis/**/*.csv
 products/**/analysis/**/*.xlsx
 *.xlsx
 
+# Exception: keep tuinanalyse draft CSVs tracked
+!products/spotto/drafts/tuinanalyse/*.csv
+
 # other
 *.mcp.json

@@ -1,0 +1,17 @@
+location_type,listing_season,garden_group,total_listings,median_days,avg_days,p25_days,p75_days
+Centrumstad,Spring,No Garden,619,103,149.1,37,215
+Centrumstad,Spring,Wide Garden,2739,66,109.7,27,155
+Centrumstad,Summer,No Garden,362,104,143.9,44,188
+Centrumstad,Summer,Wide Garden,2065,72,108.1,28,159
+Centrumstad,Autumn,No Garden,420,97,133,42,184
+Centrumstad,Autumn,Wide Garden,2328,65,99.4,30,140
+Centrumstad,Winter,No Garden,346,99,141.7,41,205
+Centrumstad,Winter,Wide Garden,1559,68,115.2,32,155
+Rest of Flanders,Spring,No Garden,1925,125,168.3,50,235
+Rest of Flanders,Spring,Wide Garden,11657,82,126.8,32,177
+Rest of Flanders,Summer,No Garden,1201,133,166.1,57,236
+Rest of Flanders,Summer,Wide Garden,8734,89,128.3,37,180
+Rest of Flanders,Autumn,No Garden,1196,115,150.4,51,192
+Rest of Flanders,Autumn,Wide Garden,8848,86,118.2,34,167
+Rest of Flanders,Winter,No Garden,1078,127,182.1,49,269
+Rest of Flanders,Winter,Wide Garden,6785,90,134.4,38,180

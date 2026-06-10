@@ -1,0 +1,9 @@
+listing_season,garden_group,total_listings,median_days,avg_days,p25_days,p75_days
+Spring,No Garden,2544,121,163.6,46,229
+Spring,Wide Garden,14396,79,123.5,32,174
+Summer,No Garden,1563,126,161,53,222
+Summer,Wide Garden,10799,85,124.5,35,176
+Autumn,No Garden,1616,110,145.9,47,190
+Autumn,Wide Garden,11176,82,114.3,33,163
+Winter,No Garden,1424,117,172.3,46,256
+Winter,Wide Garden,8344,86,130.8,36,176
