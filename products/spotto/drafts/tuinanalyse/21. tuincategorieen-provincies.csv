@@ -1,0 +1,21 @@
+province,tuincategorie,total_listings,median_days,p25_days,p75_days
+Antwerpen,"1. Geen tuin (<300 m2, geen tuinsignaal)",1682,91,40,180
+Antwerpen,"2. Tuin op klein perceel (<300 m2, wel tuinsignaal)",3432,77,33,154
+Antwerpen,3. Kleine tuin (300-600 m2),2907,77,34,160
+Antwerpen,4. Grote tuin (>=600 m2),4826,93,40,177
+Limburg,"1. Geen tuin (<300 m2, geen tuinsignaal)",724,118,50,208
+Limburg,"2. Tuin op klein perceel (<300 m2, wel tuinsignaal)",925,83,30,187
+Limburg,3. Kleine tuin (300-600 m2),3226,94,36,190
+Limburg,4. Grote tuin (>=600 m2),7190,84,33,180
+Oost-Vlaanderen,"1. Geen tuin (<300 m2, geen tuinsignaal)",3645,85,34,170
+Oost-Vlaanderen,"2. Tuin op klein perceel (<300 m2, wel tuinsignaal)",3828,66,28,142
+Oost-Vlaanderen,3. Kleine tuin (300-600 m2),5515,76,31,164
+Oost-Vlaanderen,4. Grote tuin (>=600 m2),6709,81,32,170
+Vlaams-Brabant,"1. Geen tuin (<300 m2, geen tuinsignaal)",2119,62,31,149
+Vlaams-Brabant,"2. Tuin op klein perceel (<300 m2, wel tuinsignaal)",1406,91,35,170
+Vlaams-Brabant,3. Kleine tuin (300-600 m2),3584,81,32,164
+Vlaams-Brabant,4. Grote tuin (>=600 m2),6555,91,37,178
+West-Vlaanderen,"1. Geen tuin (<300 m2, geen tuinsignaal)",3189,103,38,199
+West-Vlaanderen,"2. Tuin op klein perceel (<300 m2, wel tuinsignaal)",3341,84,35,183
+West-Vlaanderen,3. Kleine tuin (300-600 m2),4597,89,34,190
+West-Vlaanderen,4. Grote tuin (>=600 m2),4794,94,36,190

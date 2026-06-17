@@ -1,0 +1,37 @@
+tuincategorie,epc_band,listing_year,total_listings,median_price,median_price_per_m2
+"1. Geen tuin (<300 m2, geen tuinsignaal)",A-B,2023,846,349000,2352
+"1. Geen tuin (<300 m2, geen tuinsignaal)",A-B,2024,785,370000,2484
+"1. Geen tuin (<300 m2, geen tuinsignaal)",A-B,2025,1048,379000,2473
+"1. Geen tuin (<300 m2, geen tuinsignaal)",C-D,2023,1423,282000,1899
+"1. Geen tuin (<300 m2, geen tuinsignaal)",C-D,2024,1191,292000,1994
+"1. Geen tuin (<300 m2, geen tuinsignaal)",C-D,2025,1406,299000,2054
+"1. Geen tuin (<300 m2, geen tuinsignaal)",E-F,2023,1175,219000,1580
+"1. Geen tuin (<300 m2, geen tuinsignaal)",E-F,2024,879,225000,1600
+"1. Geen tuin (<300 m2, geen tuinsignaal)",E-F,2025,919,224000,1591
+"2. Tuin op klein perceel (<300 m2, wel tuinsignaal)",A-B,2023,1198,375000,2326
+"2. Tuin op klein perceel (<300 m2, wel tuinsignaal)",A-B,2024,1219,388000,2399
+"2. Tuin op klein perceel (<300 m2, wel tuinsignaal)",A-B,2025,1338,385000,2433
+"2. Tuin op klein perceel (<300 m2, wel tuinsignaal)",C-D,2023,1643,300000,2033
+"2. Tuin op klein perceel (<300 m2, wel tuinsignaal)",C-D,2024,1500,299000,2047
+"2. Tuin op klein perceel (<300 m2, wel tuinsignaal)",C-D,2025,1454,315000,2088
+"2. Tuin op klein perceel (<300 m2, wel tuinsignaal)",E-F,2023,1130,229000,1683
+"2. Tuin op klein perceel (<300 m2, wel tuinsignaal)",E-F,2024,980,225000,1631
+"2. Tuin op klein perceel (<300 m2, wel tuinsignaal)",E-F,2025,806,235000,1667
+3. Kleine tuin (300-600 m2),A-B,2023,1675,430000,2371
+3. Kleine tuin (300-600 m2),A-B,2024,1598,439700,2366
+3. Kleine tuin (300-600 m2),A-B,2025,1847,455000,2500
+3. Kleine tuin (300-600 m2),C-D,2023,2028,349000,1979
+3. Kleine tuin (300-600 m2),C-D,2024,1867,349500,1986
+3. Kleine tuin (300-600 m2),C-D,2025,1951,359000,2029
+3. Kleine tuin (300-600 m2),E-F,2023,1937,265000,1666
+3. Kleine tuin (300-600 m2),E-F,2024,1573,265000,1667
+3. Kleine tuin (300-600 m2),E-F,2025,1502,269000,1686
+4. Grote tuin (>=600 m2),A-B,2023,2009,595000,2419
+4. Grote tuin (>=600 m2),A-B,2024,1891,585000,2497
+4. Grote tuin (>=600 m2),A-B,2025,2103,595000,2562
+4. Grote tuin (>=600 m2),C-D,2023,3675,465000,2137
+4. Grote tuin (>=600 m2),C-D,2024,3260,449250,2181
+4. Grote tuin (>=600 m2),C-D,2025,3482,459000,2204
+4. Grote tuin (>=600 m2),E-F,2023,3657,338000,1901
+4. Grote tuin (>=600 m2),E-F,2024,2936,335000,1908
+4. Grote tuin (>=600 m2),E-F,2025,2977,339000,1915

@@ -1,0 +1,13 @@
+new_category,old_definition,total_listings,pct_of_all
+0. Onbekend perceel,Met tuin (oude def),2228,2.8
+0. Onbekend perceel,Onbekend (viel buiten oude analyse),2261,2.8
+0. Onbekend perceel,Zonder tuin (oude def),737,0.9
+"1. Geen tuin (<300 m2, geen tuinsignaal)",Onbekend (viel buiten oude analyse),8559,10.8
+"1. Geen tuin (<300 m2, geen tuinsignaal)",Zonder tuin (oude def),2795,3.5
+"2. Tuin op klein perceel (<300 m2, wel tuinsignaal)",Met tuin (oude def),12927,16.3
+3. Kleine tuin (300-600 m2),Met tuin (oude def),11759,14.8
+3. Kleine tuin (300-600 m2),Onbekend (viel buiten oude analyse),6634,8.4
+3. Kleine tuin (300-600 m2),Zonder tuin (oude def),1421,1.8
+4. Grote tuin (>=600 m2),Met tuin (oude def),17913,22.6
+4. Grote tuin (>=600 m2),Onbekend (viel buiten oude analyse),9904,12.5
+4. Grote tuin (>=600 m2),Zonder tuin (oude def),2233,2.8

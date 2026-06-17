@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 """Build a Word version of the tuinanalyse press prep document from the markdown."""
 import re
+import sys
 from docx import Document
 from docx.shared import Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 
-SRC = "persbericht.md"
-OUT = "persbericht.docx"
+SRC = sys.argv[1] if len(sys.argv) > 1 else "persbericht.md"
+OUT = SRC.rsplit(".", 1)[0] + ".docx"
 
 doc = Document()
 
