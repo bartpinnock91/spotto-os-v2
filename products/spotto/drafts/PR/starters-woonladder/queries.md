@@ -186,7 +186,7 @@ ORDER BY prov, yr;
 
 ## 5. Appartementen — €/m² per provincie (kotfilter, lentes 2024 en 2026)
 
-Voedt de tabel "Mediane prijs per m² — appartementen per provincie" (Vlaams-Brabant +11%, Antwerpen +9%, West-Vl −5,6%).
+Voedt de tabel "Mediane prijs per m² — appartementen per provincie" (Vlaams-Brabant +11%, Antwerpen +8,7%, West-Vl −5,6%). Documenteer `n` per provincie/jaar in de bijlage.
 
 ```sql
 SELECT DISTINCT prov, yr,

@@ -2,16 +2,22 @@
    Groene kloof — queries achter rapport.md
    ----------------------------------------------------------------------------
    Bron:   mssql-comparison (Vergelijkingspanden referentie-DB, databricks-schema)
-   Grein:  on-market-episode per woning = address_key + address_sequence_number
-           (ReferencePropertiesSequences), nooit per publicatie.
+   Grein:  on-market-episode per woning = address_key + address_sequence_number,
+           nooit per publicatie (~1,56x dubbeltelling zonder dedup).
+   Periode: lente = maart–mei; jaar uit online_from op ReferencePropertiesPublications
+           (identiek aan starters-woonladder/queries.md).
+           SQL: online_from >= 'YYYY-03-01' AND online_from < 'YYYY-06-01'
    Prijs:  eerste vraagprijs van de episode (ROW_NUMBER op price_online_from ASC)
-           uit ReferencePropertiesPublicationPrices. Vraagprijzen, geen transacties.
+           binnen de lentepublicaties, uit ReferencePropertiesPublicationPrices.
+           Vraagprijzen, geen transacties.
    €/m²:   op construction_area (bewoonbare opp).
-   Periode: lente = maand 3-5; jaar uit sequence_start_date.
-   Gebied:  Vlaanderen = postcode 1500-3999 OF 8000-9999.
-            Provincies: Antwerpen 2000-2999; Vlaams-Brabant 1500-1999+3000-3499;
-            Limburg 3500-3999; West-Vl 8000-8999; Oost-Vl 9000-9999.
-   Enums:   property_type 1=huis, 2=appartement; transaction_type 1=koop.
+   Gebied:  Vlaanderen via NIS-prefix op statistical_sector_nis_level_4:
+            ('11','12','13','23','24','31','32','33','34','35','36','37','38',
+             '41','42','43','44','45','46','71','72','73')
+            ~3–4% zonder NIS valt buiten.
+            Provincies: Antwerpen 11/12/13 · Vl-Brabant 23/24 · West-Vl 31–38
+                        · Oost-Vl 41–46 · Limburg 71–73
+   Enums:   property_type op publicatie: 1=huis, 2=appartement; transaction_type 1=koop.
             epc_label 1-7 = A+,A,B,C,D,E,F  -> A-B=(1,2,3) C-D=(4,5) E-F=(6,7).
             condition_state_type (domein-volgorde, zie query 7):
               0 onbekend, 1 te renoveren, 2 op te frissen, 3 goed onderhouden,
@@ -21,15 +27,13 @@
    - query moet met SELECT beginnen (geen WITH); daarom geneste subqueries i.p.v. CTE's.
    - mediaan = PERCENTILE_CONT(0.5) WITHIN GROUP (...) OVER (PARTITION BY ...) + SELECT DISTINCT.
 
-   NB: de samenstelling van het goedkoopste segment in rapport.md
-   ("huizen < EUR 250k: 63% E/F, 8% A-B, nieuwbouw <1%") kwam oorspronkelijk uit
-   de starters-woonladder-analyse; query 9 reproduceert ze met deze methode.
+   Resultaten gedraaid 2026-06-29 (online_from + NIS, zie commentaren per query).
    ============================================================================ */
 
 
 /* ----------------------------------------------------------------------------
    QUERY 1 — Huizen, mediane vraagprijs per m2 per energielabel, Vlaanderen
-   Voedt: databijlage tabel 1 + kernclaim (A-B +6,0% vs E-F +3,8%; premie 34->37%).
+   Voedt: databijlage tabel 1 + kernclaim (A-B vs E-F; premie 34->37%).
    ---------------------------------------------------------------------------- */
 SELECT DISTINCT yr, epc_group,
   PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY ppsqm) OVER (PARTITION BY yr, epc_group) AS median_ppsqm,
@@ -39,34 +43,34 @@ FROM (
     CASE WHEN rp.epc_label IN (1,2,3) THEN 'A-B' WHEN rp.epc_label IN (4,5) THEN 'C-D' WHEN rp.epc_label IN (6,7) THEN 'E-F' END AS epc_group,
     e.price / rp.construction_area AS ppsqm
   FROM (
-    SELECT ep.yr, ep.address_key, pr.price
+    SELECT ep.yr, ep.address_key, ep.price
     FROM (
-      SELECT s.address_key, s.address_sequence_number, YEAR(s.sequence_start_date) AS yr
-      FROM databricks.ReferencePropertiesSequences s
-      WHERE MONTH(s.sequence_start_date) IN (3,4,5)
-        AND YEAR(s.sequence_start_date) IN (2024,2025,2026)
-        AND ( TRY_CAST(s.postcode AS INT) BETWEEN 1500 AND 3999 OR TRY_CAST(s.postcode AS INT) BETWEEN 8000 AND 9999 )
-    ) ep
-    JOIN (
-      SELECT p.address_key, p.address_sequence_number, pp.price,
-             ROW_NUMBER() OVER (PARTITION BY p.address_key, p.address_sequence_number ORDER BY pp.price_online_from ASC) AS rn
+      SELECT p.address_key, p.address_sequence_number, pr.price,
+        CASE WHEN p.online_from < '2025-01-01' THEN 2024 WHEN p.online_from < '2026-01-01' THEN 2025 ELSE 2026 END AS yr,
+        ROW_NUMBER() OVER (PARTITION BY p.address_key, p.address_sequence_number ORDER BY pr.price_online_from) AS rn
       FROM databricks.ReferencePropertiesPublications p
-      JOIN databricks.ReferencePropertiesPublicationPrices pp
-        ON pp.reference_properties_publication_id = p.reference_properties_publication_id
-      WHERE p.transaction_type = 1 AND pp.transaction_type = 1 AND pp.price > 0
-    ) pr ON pr.address_key = ep.address_key AND pr.address_sequence_number = ep.address_sequence_number AND pr.rn = 1
+      JOIN databricks.ReferencePropertiesPublicationPrices pr
+        ON pr.reference_properties_publication_id = p.reference_properties_publication_id AND pr.transaction_type = 1
+      JOIN databricks.ReferenceProperties rp ON rp.address_key = p.address_key
+      WHERE p.transaction_type = 1 AND p.property_type = 1 AND pr.price > 0
+        AND LEFT(rp.statistical_sector_nis_level_4,2) IN
+          ('11','12','13','23','24','31','32','33','34','35','36','37','38','41','42','43','44','45','46','71','72','73')
+        AND ((p.online_from >= '2024-03-01' AND p.online_from < '2024-06-01')
+          OR (p.online_from >= '2025-03-01' AND p.online_from < '2025-06-01')
+          OR (p.online_from >= '2026-03-01' AND p.online_from < '2026-06-01'))
+    ) ep
+    WHERE ep.rn = 1
   ) e
   JOIN databricks.ReferenceProperties rp ON rp.address_key = e.address_key
-  WHERE rp.property_type = 1 AND rp.construction_area > 0 AND rp.epc_label BETWEEN 1 AND 7
+  WHERE rp.construction_area > 0 AND rp.epc_label BETWEEN 1 AND 7
 ) final
 ORDER BY epc_group, yr;
-/* Resultaat: A-B 2454/2526/2602 (n2026 2294); C-D 2130/2141/2210 (2580); E-F 1833/1846/1903 (1728). */
+/* Resultaat 2026-06-29: A-B 2445/2536/2609 (n2026 3262); C-D 2108/2125/2194 (3525); E-F 1793/1799/1846 (2441). Premie 36%->41%. */
 
 
 /* ----------------------------------------------------------------------------
    QUERY 2 — Huizen, mediane vraagprijs PER WONING per energielabel (2024 vs 2026)
-   Voedt: databijlage tabel 2 + vermogenskloof-claim (A-B +EUR 39.500 vs E-F +EUR 5.000).
-   Verschilt van query 1: aggregeert op price i.p.v. price/area; geen area-filter nodig.
+   Voedt: databijlage tabel 2 + vermogenskloof-claim (A-B vs E-F in euro per woning).
    ---------------------------------------------------------------------------- */
 SELECT DISTINCT yr, epc_group,
   PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY price) OVER (PARTITION BY yr, epc_group) AS median_price,
@@ -76,28 +80,28 @@ FROM (
     CASE WHEN rp.epc_label IN (1,2,3) THEN 'A-B' WHEN rp.epc_label IN (4,5) THEN 'C-D' WHEN rp.epc_label IN (6,7) THEN 'E-F' END AS epc_group,
     e.price
   FROM (
-    SELECT ep.yr, ep.address_key, pr.price
+    SELECT ep.yr, ep.address_key, ep.price
     FROM (
-      SELECT s.address_key, s.address_sequence_number, YEAR(s.sequence_start_date) AS yr
-      FROM databricks.ReferencePropertiesSequences s
-      WHERE MONTH(s.sequence_start_date) IN (3,4,5)
-        AND YEAR(s.sequence_start_date) IN (2024,2026)
-        AND ( TRY_CAST(s.postcode AS INT) BETWEEN 1500 AND 3999 OR TRY_CAST(s.postcode AS INT) BETWEEN 8000 AND 9999 )
-    ) ep
-    JOIN (
-      SELECT p.address_key, p.address_sequence_number, pp.price,
-             ROW_NUMBER() OVER (PARTITION BY p.address_key, p.address_sequence_number ORDER BY pp.price_online_from ASC) AS rn
+      SELECT p.address_key, p.address_sequence_number, pr.price,
+        CASE WHEN p.online_from < '2025-01-01' THEN 2024 ELSE 2026 END AS yr,
+        ROW_NUMBER() OVER (PARTITION BY p.address_key, p.address_sequence_number ORDER BY pr.price_online_from) AS rn
       FROM databricks.ReferencePropertiesPublications p
-      JOIN databricks.ReferencePropertiesPublicationPrices pp
-        ON pp.reference_properties_publication_id = p.reference_properties_publication_id
-      WHERE p.transaction_type = 1 AND pp.transaction_type = 1 AND pp.price > 0
-    ) pr ON pr.address_key = ep.address_key AND pr.address_sequence_number = ep.address_sequence_number AND pr.rn = 1
+      JOIN databricks.ReferencePropertiesPublicationPrices pr
+        ON pr.reference_properties_publication_id = p.reference_properties_publication_id AND pr.transaction_type = 1
+      JOIN databricks.ReferenceProperties rp ON rp.address_key = p.address_key
+      WHERE p.transaction_type = 1 AND p.property_type = 1 AND pr.price > 0
+        AND LEFT(rp.statistical_sector_nis_level_4,2) IN
+          ('11','12','13','23','24','31','32','33','34','35','36','37','38','41','42','43','44','45','46','71','72','73')
+        AND ((p.online_from >= '2024-03-01' AND p.online_from < '2024-06-01')
+          OR (p.online_from >= '2026-03-01' AND p.online_from < '2026-06-01'))
+    ) ep
+    WHERE ep.rn = 1
   ) e
   JOIN databricks.ReferenceProperties rp ON rp.address_key = e.address_key
-  WHERE rp.property_type = 1 AND rp.epc_label BETWEEN 1 AND 7
+  WHERE rp.epc_label BETWEEN 1 AND 7
 ) final
 ORDER BY epc_group, yr;
-/* Resultaat: A-B 439.500 -> 479.000; C-D 375.000 -> 398.000; E-F 294.000 -> 299.000. */
+/* Resultaat 2026-06-29: A-B 445.000 -> 485.000; C-D 375.000 -> 399.000; E-F 290.000 -> 299.000. */
 
 
 /* ----------------------------------------------------------------------------
@@ -108,17 +112,32 @@ SELECT DISTINCT yr, epc_group,
   PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY ca) OVER (PARTITION BY yr, epc_group) AS median_area,
   COUNT(*) OVER (PARTITION BY yr, epc_group) AS n
 FROM (
-  SELECT YEAR(s.sequence_start_date) AS yr,
+  SELECT e.yr,
     CASE WHEN rp.epc_label IN (1,2,3) THEN 'A-B' WHEN rp.epc_label IN (4,5) THEN 'C-D' WHEN rp.epc_label IN (6,7) THEN 'E-F' END AS epc_group,
     rp.construction_area AS ca
-  FROM databricks.ReferencePropertiesSequences s
-  JOIN databricks.ReferenceProperties rp ON rp.address_key = s.address_key
-  WHERE MONTH(s.sequence_start_date) IN (3,4,5) AND YEAR(s.sequence_start_date) IN (2024,2026)
-    AND ( TRY_CAST(s.postcode AS INT) BETWEEN 1500 AND 3999 OR TRY_CAST(s.postcode AS INT) BETWEEN 8000 AND 9999 )
-    AND rp.property_type = 1 AND rp.construction_area > 0 AND rp.epc_label BETWEEN 1 AND 7
+  FROM (
+    SELECT ep.yr, ep.address_key
+    FROM (
+      SELECT p.address_key, p.address_sequence_number,
+        CASE WHEN p.online_from < '2025-01-01' THEN 2024 ELSE 2026 END AS yr,
+        ROW_NUMBER() OVER (PARTITION BY p.address_key, p.address_sequence_number ORDER BY pr.price_online_from) AS rn
+      FROM databricks.ReferencePropertiesPublications p
+      JOIN databricks.ReferencePropertiesPublicationPrices pr
+        ON pr.reference_properties_publication_id = p.reference_properties_publication_id AND pr.transaction_type = 1
+      JOIN databricks.ReferenceProperties rp ON rp.address_key = p.address_key
+      WHERE p.transaction_type = 1 AND p.property_type = 1 AND pr.price > 0
+        AND LEFT(rp.statistical_sector_nis_level_4,2) IN
+          ('11','12','13','23','24','31','32','33','34','35','36','37','38','41','42','43','44','45','46','71','72','73')
+        AND ((p.online_from >= '2024-03-01' AND p.online_from < '2024-06-01')
+          OR (p.online_from >= '2026-03-01' AND p.online_from < '2026-06-01'))
+    ) ep
+    WHERE ep.rn = 1
+  ) e
+  JOIN databricks.ReferenceProperties rp ON rp.address_key = e.address_key
+  WHERE rp.construction_area > 0 AND rp.epc_label BETWEEN 1 AND 7
 ) final
 ORDER BY epc_group, yr;
-/* Resultaat: A-B 182->185; C-D 175->180; E-F 160->161 (stabiel). */
+/* Resultaat 2026-06-29: A-B 188->194; C-D 182->189; E-F 163->165. */
 
 
 /* ----------------------------------------------------------------------------
@@ -133,27 +152,26 @@ SELECT DISTINCT cond,
 FROM (
   SELECT rp.condition_state_type AS cond, rp.epc_label AS epc, e.price, e.price / rp.construction_area AS ppsqm
   FROM (
-    SELECT ep.address_key, pr.price
+    SELECT ep.address_key, ep.price
     FROM (
-      SELECT s.address_key, s.address_sequence_number
-      FROM databricks.ReferencePropertiesSequences s
-      WHERE MONTH(s.sequence_start_date) IN (3,4,5) AND YEAR(s.sequence_start_date) = 2026
-        AND ( TRY_CAST(s.postcode AS INT) BETWEEN 1500 AND 3999 OR TRY_CAST(s.postcode AS INT) BETWEEN 8000 AND 9999 )
-    ) ep
-    JOIN (
-      SELECT p.address_key, p.address_sequence_number, pp.price,
-             ROW_NUMBER() OVER (PARTITION BY p.address_key, p.address_sequence_number ORDER BY pp.price_online_from ASC) AS rn
+      SELECT p.address_key, p.address_sequence_number, pr.price,
+        ROW_NUMBER() OVER (PARTITION BY p.address_key, p.address_sequence_number ORDER BY pr.price_online_from) AS rn
       FROM databricks.ReferencePropertiesPublications p
-      JOIN databricks.ReferencePropertiesPublicationPrices pp
-        ON pp.reference_properties_publication_id = p.reference_properties_publication_id
-      WHERE p.transaction_type = 1 AND pp.transaction_type = 1 AND pp.price > 0
-    ) pr ON pr.address_key = ep.address_key AND pr.address_sequence_number = ep.address_sequence_number AND pr.rn = 1
+      JOIN databricks.ReferencePropertiesPublicationPrices pr
+        ON pr.reference_properties_publication_id = p.reference_properties_publication_id AND pr.transaction_type = 1
+      JOIN databricks.ReferenceProperties rp ON rp.address_key = p.address_key
+      WHERE p.transaction_type = 1 AND p.property_type = 1 AND pr.price > 0
+        AND p.online_from >= '2026-03-01' AND p.online_from < '2026-06-01'
+        AND LEFT(rp.statistical_sector_nis_level_4,2) IN
+          ('11','12','13','23','24','31','32','33','34','35','36','37','38','41','42','43','44','45','46','71','72','73')
+    ) ep
+    WHERE ep.rn = 1
   ) e
   JOIN databricks.ReferenceProperties rp ON rp.address_key = e.address_key
-  WHERE rp.property_type = 1 AND rp.construction_area > 0 AND rp.condition_state_type IS NOT NULL
+  WHERE rp.construction_area > 0 AND rp.condition_state_type IS NOT NULL
 ) final
 ORDER BY cond;
-/* Resultaat (cond: EUR/m2, med prijs): 1=1748/295k, 2=1916/332k, 3=2347/425k, 4=2750/535k, 5=2730/477k. */
+/* Resultaat 2026-06-29 (cond: EUR/m2, med prijs): 1=1718/295k, 2=1869/329k, 3=2323/429k, 4=2748/549k, 5=2737/472k. */
 
 
 /* ----------------------------------------------------------------------------
@@ -166,43 +184,50 @@ SELECT DISTINCT yr, prov, epc_group,
 FROM (
   SELECT e.yr,
     CASE
-      WHEN pc BETWEEN 2000 AND 2999 THEN 'Antwerpen'
-      WHEN pc BETWEEN 1500 AND 1999 OR pc BETWEEN 3000 AND 3499 THEN 'Vlaams-Brabant'
-      WHEN pc BETWEEN 3500 AND 3999 THEN 'Limburg'
-      WHEN pc BETWEEN 8000 AND 8999 THEN 'West-Vlaanderen'
-      WHEN pc BETWEEN 9000 AND 9999 THEN 'Oost-Vlaanderen' END AS prov,
+      WHEN LEFT(e.nis,2) IN ('11','12','13') THEN 'Antwerpen'
+      WHEN LEFT(e.nis,2) IN ('23','24') THEN 'Vlaams-Brabant'
+      WHEN LEFT(e.nis,2) IN ('31','32','33','34','35','36','37','38') THEN 'West-Vlaanderen'
+      WHEN LEFT(e.nis,2) IN ('41','42','43','44','45','46') THEN 'Oost-Vlaanderen'
+      WHEN LEFT(e.nis,2) IN ('71','72','73') THEN 'Limburg'
+      ELSE 'X' END AS prov,
     CASE WHEN rp.epc_label IN (1,2,3) THEN 'A-B' WHEN rp.epc_label IN (6,7) THEN 'E-F' END AS epc_group,
     e.price / rp.construction_area AS ppsqm
   FROM (
-    SELECT ep.yr, ep.address_key, pr.price, ep.pc
+    SELECT ep.yr, ep.address_key, ep.price, ep.nis
     FROM (
-      SELECT s.address_key, s.address_sequence_number, YEAR(s.sequence_start_date) AS yr, TRY_CAST(s.postcode AS INT) AS pc
-      FROM databricks.ReferencePropertiesSequences s
-      WHERE MONTH(s.sequence_start_date) IN (3,4,5)
-        AND YEAR(s.sequence_start_date) IN (2024,2026)
-        AND ( TRY_CAST(s.postcode AS INT) BETWEEN 1500 AND 3999 OR TRY_CAST(s.postcode AS INT) BETWEEN 8000 AND 9999 )
-    ) ep
-    JOIN (
-      SELECT p.address_key, p.address_sequence_number, pp.price,
-             ROW_NUMBER() OVER (PARTITION BY p.address_key, p.address_sequence_number ORDER BY pp.price_online_from ASC) AS rn
+      SELECT p.address_key, p.address_sequence_number, pr.price,
+        rp.statistical_sector_nis_level_4 AS nis,
+        CASE WHEN p.online_from < '2025-01-01' THEN 2024 ELSE 2026 END AS yr,
+        ROW_NUMBER() OVER (PARTITION BY p.address_key, p.address_sequence_number ORDER BY pr.price_online_from) AS rn
       FROM databricks.ReferencePropertiesPublications p
-      JOIN databricks.ReferencePropertiesPublicationPrices pp
-        ON pp.reference_properties_publication_id = p.reference_properties_publication_id
-      WHERE p.transaction_type = 1 AND pp.transaction_type = 1 AND pp.price > 0
-    ) pr ON pr.address_key = ep.address_key AND pr.address_sequence_number = ep.address_sequence_number AND pr.rn = 1
+      JOIN databricks.ReferencePropertiesPublicationPrices pr
+        ON pr.reference_properties_publication_id = p.reference_properties_publication_id AND pr.transaction_type = 1
+      JOIN databricks.ReferenceProperties rp ON rp.address_key = p.address_key
+      WHERE p.transaction_type = 1 AND p.property_type = 1 AND pr.price > 0
+        AND LEFT(rp.statistical_sector_nis_level_4,2) IN
+          ('11','12','13','23','24','31','32','33','34','35','36','37','38','41','42','43','44','45','46','71','72','73')
+        AND ((p.online_from >= '2024-03-01' AND p.online_from < '2024-06-01')
+          OR (p.online_from >= '2026-03-01' AND p.online_from < '2026-06-01'))
+    ) ep
+    WHERE ep.rn = 1
   ) e
   JOIN databricks.ReferenceProperties rp ON rp.address_key = e.address_key
-  WHERE rp.property_type = 1 AND rp.construction_area > 0 AND rp.epc_label IN (1,2,3,6,7)
+  WHERE rp.construction_area > 0 AND rp.epc_label IN (1,2,3,6,7)
 ) final
-WHERE epc_group IS NOT NULL AND prov IS NOT NULL
+WHERE epc_group IS NOT NULL AND prov <> 'X'
 ORDER BY prov, epc_group, yr;
-/* Premie 2024->2026: Vl-Brabant 23->33; Oost-Vl 30->38; Limburg 40->48; Antw 30->34; West-Vl 52->45. */
+/* Resultaat 2026-06-29 premie 2024->2026: Vl-Brabant 28->34; Oost-Vl 32->44; Limburg 39->50; Antw 33->36; West-Vl 54->56.
+   n per cel (A-B / E-F), 2024 -> 2026:
+     Vl-Brabant     A-B 439->568, E-F 581->540
+     Oost-Vl        A-B 779->758, E-F 773->582
+     Limburg        A-B 546->605, E-F 452->402
+     Antwerpen      A-B 527->816, E-F 374->466
+     West-Vl        A-B 645->689, E-F 528->557   (alle cellen >=374, geen dunne segmenten) */
 
 
 /* ----------------------------------------------------------------------------
    QUERY 6 — Appartementen, mediane vraagprijs per m2 per label (kotfilter >=35 m2)
    Voedt: databijlage tabel 5 + sectie "Bij appartementen speelt het anders".
-   Identiek aan query 1 maar property_type=2 en construction_area >= 35.
    ---------------------------------------------------------------------------- */
 SELECT DISTINCT yr, epc_group,
   PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY ppsqm) OVER (PARTITION BY yr, epc_group) AS median_ppsqm,
@@ -212,34 +237,36 @@ FROM (
     CASE WHEN rp.epc_label IN (1,2,3) THEN 'A-B' WHEN rp.epc_label IN (4,5) THEN 'C-D' WHEN rp.epc_label IN (6,7) THEN 'E-F' END AS epc_group,
     e.price / rp.construction_area AS ppsqm
   FROM (
-    SELECT ep.yr, ep.address_key, pr.price
+    SELECT ep.yr, ep.address_key, ep.price
     FROM (
-      SELECT s.address_key, s.address_sequence_number, YEAR(s.sequence_start_date) AS yr
-      FROM databricks.ReferencePropertiesSequences s
-      WHERE MONTH(s.sequence_start_date) IN (3,4,5)
-        AND YEAR(s.sequence_start_date) IN (2024,2025,2026)
-        AND ( TRY_CAST(s.postcode AS INT) BETWEEN 1500 AND 3999 OR TRY_CAST(s.postcode AS INT) BETWEEN 8000 AND 9999 )
-    ) ep
-    JOIN (
-      SELECT p.address_key, p.address_sequence_number, pp.price,
-             ROW_NUMBER() OVER (PARTITION BY p.address_key, p.address_sequence_number ORDER BY pp.price_online_from ASC) AS rn
+      SELECT p.address_key, p.address_sequence_number, pr.price,
+        CASE WHEN p.online_from < '2025-01-01' THEN 2024 WHEN p.online_from < '2026-01-01' THEN 2025 ELSE 2026 END AS yr,
+        ROW_NUMBER() OVER (PARTITION BY p.address_key, p.address_sequence_number ORDER BY pr.price_online_from) AS rn
       FROM databricks.ReferencePropertiesPublications p
-      JOIN databricks.ReferencePropertiesPublicationPrices pp
-        ON pp.reference_properties_publication_id = p.reference_properties_publication_id
-      WHERE p.transaction_type = 1 AND pp.transaction_type = 1 AND pp.price > 0
-    ) pr ON pr.address_key = ep.address_key AND pr.address_sequence_number = ep.address_sequence_number AND pr.rn = 1
+      JOIN databricks.ReferencePropertiesPublicationPrices pr
+        ON pr.reference_properties_publication_id = p.reference_properties_publication_id AND pr.transaction_type = 1
+      JOIN databricks.ReferenceProperties rp ON rp.address_key = p.address_key
+      WHERE p.transaction_type = 1 AND p.property_type = 2 AND pr.price > 0
+        AND LEFT(rp.statistical_sector_nis_level_4,2) IN
+          ('11','12','13','23','24','31','32','33','34','35','36','37','38','41','42','43','44','45','46','71','72','73')
+        AND ((p.online_from >= '2024-03-01' AND p.online_from < '2024-06-01')
+          OR (p.online_from >= '2025-03-01' AND p.online_from < '2025-06-01')
+          OR (p.online_from >= '2026-03-01' AND p.online_from < '2026-06-01'))
+    ) ep
+    WHERE ep.rn = 1
   ) e
   JOIN databricks.ReferenceProperties rp ON rp.address_key = e.address_key
-  WHERE rp.property_type = 2 AND rp.construction_area >= 35 AND rp.epc_label BETWEEN 1 AND 7
+  WHERE rp.construction_area >= 35 AND rp.epc_label BETWEEN 1 AND 7
 ) final
 ORDER BY epc_group, yr;
-/* Resultaat: A-B 3350/3376/3499; C-D 2838/3000/2990; E-F 2524/2641/2932 (E-F n2026 = 109, te dun). */
+/* Resultaat 2026-06-29: A-B 3361/3371/3468; C-D 2858/2862/2957; E-F 2532/2586/2764 (E-F n2026 = 179). */
 
 
 /* ----------------------------------------------------------------------------
    QUERY 7 — Ontcijfering condition_state_type (staat van de woning)
    Voedt: methodebox + enum-mapping bovenaan. Domein-volgorde bevestigd door
    correlatie met EPC/bouwjaar (en met broncode ConditionStateType.cs).
+   Geen periode-filter: globale verdeling op referentie-eigenschappen.
    ---------------------------------------------------------------------------- */
 SELECT rp.condition_state_type,
   COUNT(*) AS n,
@@ -267,34 +294,35 @@ FROM (
     CASE WHEN rp.epc_label IN (1,2,3) THEN 'A-B' WHEN rp.epc_label IN (6,7) THEN 'E-F' END AS epc_group,
     e.price / rp.construction_area AS ppsqm
   FROM (
-    SELECT ep.yr, ep.address_key, pr.price
+    SELECT ep.yr, ep.address_key, ep.price
     FROM (
-      SELECT s.address_key, s.address_sequence_number, YEAR(s.sequence_start_date) AS yr
-      FROM databricks.ReferencePropertiesSequences s
-      WHERE MONTH(s.sequence_start_date) IN (3,4,5)
-        AND YEAR(s.sequence_start_date) IN (2024,2026)
-        AND ( TRY_CAST(s.postcode AS INT) BETWEEN 1500 AND 3999 OR TRY_CAST(s.postcode AS INT) BETWEEN 8000 AND 9999 )
-    ) ep
-    JOIN (
-      SELECT p.address_key, p.address_sequence_number, pp.price,
-             ROW_NUMBER() OVER (PARTITION BY p.address_key, p.address_sequence_number ORDER BY pp.price_online_from ASC) AS rn
+      SELECT p.address_key, p.address_sequence_number, pr.price,
+        CASE WHEN p.online_from < '2025-01-01' THEN 2024 ELSE 2026 END AS yr,
+        ROW_NUMBER() OVER (PARTITION BY p.address_key, p.address_sequence_number ORDER BY pr.price_online_from) AS rn
       FROM databricks.ReferencePropertiesPublications p
-      JOIN databricks.ReferencePropertiesPublicationPrices pp
-        ON pp.reference_properties_publication_id = p.reference_properties_publication_id
-      WHERE p.transaction_type = 1 AND pp.transaction_type = 1 AND pp.price > 0
-    ) pr ON pr.address_key = ep.address_key AND pr.address_sequence_number = ep.address_sequence_number AND pr.rn = 1
+      JOIN databricks.ReferencePropertiesPublicationPrices pr
+        ON pr.reference_properties_publication_id = p.reference_properties_publication_id AND pr.transaction_type = 1
+      JOIN databricks.ReferenceProperties rp ON rp.address_key = p.address_key
+      WHERE p.transaction_type = 1 AND p.property_type = 1 AND pr.price > 0
+        AND LEFT(rp.statistical_sector_nis_level_4,2) IN
+          ('11','12','13','23','24','31','32','33','34','35','36','37','38','41','42','43','44','45','46','71','72','73')
+        AND ((p.online_from >= '2024-03-01' AND p.online_from < '2024-06-01')
+          OR (p.online_from >= '2026-03-01' AND p.online_from < '2026-06-01'))
+    ) ep
+    WHERE ep.rn = 1
   ) e
   JOIN databricks.ReferenceProperties rp ON rp.address_key = e.address_key
-  WHERE rp.property_type = 1 AND rp.construction_area > 0 AND rp.epc_label IN (1,2,3,6,7)
+  WHERE rp.construction_area > 0 AND rp.epc_label IN (1,2,3,6,7)
 ) final
 WHERE epc_group IS NOT NULL
 ORDER BY band, epc_group, yr;
-/* Premie 2024->2026 per band: <100 40->39; 100-150 32->40; 150-220 40->44; 220+ 49->56. */
+/* Resultaat 2026-06-29 premie per band 2024->2026: <100 61->51; 100-150 34->42; 150-220 41->48; 220+ 51->63. */
 
 
 /* ----------------------------------------------------------------------------
    QUERY 9 — Samenstelling goedkoopste aanbod: huizen < EUR 250k, lente 2026, Vlaanderen
    Voedt: databijlage tabel "Staat van het goedkoopste aanbod" + openingssectie.
+   Identiek aan starters-woonladder/queries.md §3 (band <250k).
    EPC-aandelen op woningen met gekend label (n_epc_known); nieuwbouw op het totaal.
    ---------------------------------------------------------------------------- */
 SELECT
@@ -304,25 +332,62 @@ SELECT
   SUM(CASE WHEN epc IN (1,2,3) THEN 1 ELSE 0 END) AS n_ab,
   SUM(CASE WHEN nb = 2 THEN 1 ELSE 0 END) AS n_newbuild
 FROM (
-  SELECT rp.epc_label AS epc, rp.new_build_type AS nb
+  SELECT rp.epc_label AS epc, rp.new_build_type AS nb, e.price
   FROM (
-    SELECT ep.address_key, pr.price
+    SELECT ep.address_key, ep.price
     FROM (
-      SELECT s.address_key, s.address_sequence_number
-      FROM databricks.ReferencePropertiesSequences s
-      WHERE MONTH(s.sequence_start_date) IN (3,4,5) AND YEAR(s.sequence_start_date) = 2026
-        AND ( TRY_CAST(s.postcode AS INT) BETWEEN 1500 AND 3999 OR TRY_CAST(s.postcode AS INT) BETWEEN 8000 AND 9999 )
-    ) ep
-    JOIN (
-      SELECT p.address_key, p.address_sequence_number, pp.price,
-             ROW_NUMBER() OVER (PARTITION BY p.address_key, p.address_sequence_number ORDER BY pp.price_online_from ASC) AS rn
+      SELECT p.address_key, p.address_sequence_number, pr.price,
+        ROW_NUMBER() OVER (PARTITION BY p.address_key, p.address_sequence_number ORDER BY pr.price_online_from) AS rn
       FROM databricks.ReferencePropertiesPublications p
-      JOIN databricks.ReferencePropertiesPublicationPrices pp
-        ON pp.reference_properties_publication_id = p.reference_properties_publication_id
-      WHERE p.transaction_type = 1 AND pp.transaction_type = 1 AND pp.price > 0
-    ) pr ON pr.address_key = ep.address_key AND pr.address_sequence_number = ep.address_sequence_number AND pr.rn = 1
+      JOIN databricks.ReferencePropertiesPublicationPrices pr
+        ON pr.reference_properties_publication_id = p.reference_properties_publication_id AND pr.transaction_type = 1
+      JOIN databricks.ReferenceProperties rp ON rp.address_key = p.address_key
+      WHERE p.transaction_type = 1 AND p.property_type = 1 AND pr.price > 0
+        AND p.online_from >= '2026-03-01' AND p.online_from < '2026-06-01'
+        AND LEFT(rp.statistical_sector_nis_level_4,2) IN
+          ('11','12','13','23','24','31','32','33','34','35','36','37','38','41','42','43','44','45','46','71','72','73')
+    ) ep
+    WHERE ep.rn = 1
   ) e
   JOIN databricks.ReferenceProperties rp ON rp.address_key = e.address_key
-  WHERE rp.property_type = 1 AND e.price < 250000
+  WHERE e.price < 250000
 ) final;
-/* Resultaat: n_total 936, n_epc_known 914, n_ef 572 (63%), n_ab 69 (8%), n_newbuild 6 (<1%). */
+/* Resultaat 2026-06-29: n_total 1411, n_epc_known 1392, n_ef 890 (64%), n_ab 93 (7%), n_newbuild 3. */
+
+
+/* ----------------------------------------------------------------------------
+   QUERY 10 — RECONCILIATIE: episode-overlap online_from vs sequence_start_date (huizen, lente 2026)
+   Meet hoeveel episodes de oude en nieuwe methode verschillend selecteren.
+   Draaien na harmonisatie; resultaten niet in rapport.md.
+   ---------------------------------------------------------------------------- */
+SELECT
+  SUM(CASE WHEN in_online = 1 AND in_seq = 1 THEN 1 ELSE 0 END) AS n_both,
+  SUM(CASE WHEN in_online = 1 AND in_seq = 0 THEN 1 ELSE 0 END) AS n_online_only,
+  SUM(CASE WHEN in_online = 0 AND in_seq = 1 THEN 1 ELSE 0 END) AS n_sequence_only
+FROM (
+  SELECT
+    COALESCE(o.ep_key, s.ep_key) AS ep_key,
+    CASE WHEN o.ep_key IS NOT NULL THEN 1 ELSE 0 END AS in_online,
+    CASE WHEN s.ep_key IS NOT NULL THEN 1 ELSE 0 END AS in_seq
+  FROM (
+    SELECT DISTINCT CONCAT(p.address_key,'|',p.address_sequence_number) AS ep_key
+    FROM databricks.ReferencePropertiesPublications p
+    JOIN databricks.ReferenceProperties rp ON rp.address_key = p.address_key
+    WHERE p.transaction_type = 1 AND p.property_type = 1
+      AND p.online_from >= '2026-03-01' AND p.online_from < '2026-06-01'
+      AND LEFT(rp.statistical_sector_nis_level_4,2) IN
+        ('11','12','13','23','24','31','32','33','34','35','36','37','38','41','42','43','44','45','46','71','72','73')
+  ) o
+  FULL OUTER JOIN (
+    SELECT DISTINCT CONCAT(s.address_key,'|',s.address_sequence_number) AS ep_key
+    FROM databricks.ReferencePropertiesSequences s
+    WHERE MONTH(s.sequence_start_date) IN (3,4,5) AND YEAR(s.sequence_start_date) = 2026
+      AND (TRY_CAST(s.postcode AS INT) BETWEEN 1500 AND 3999 OR TRY_CAST(s.postcode AS INT) BETWEEN 8000 AND 9999)
+  ) s ON o.ep_key = s.ep_key
+) base;
+/* Resultaat 2026-06-29: n_both 7922, n_online_only 3538, n_sequence_only 12265.
+   LET OP — geen zuivere periode-vergelijking: de sequence-kant gebruikt postcode i.p.v. NIS
+   EN heeft geen property_type-filter (telt dus ook appartementen/grond), terwijl de online-kant
+   enkel huizen telt. Daardoor is n_sequence_only sterk opgeblazen. Lees dit niet als
+   "de online_from-methode laat 12k huizen vallen". Voor een echte periode-isolatie:
+   beide kanten op NIS + property_type=1 brengen. Diagnostiek, niet in rapport.md. */

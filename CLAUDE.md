@@ -74,6 +74,8 @@ This repo uses MCP servers for direct integration:
 | **Jira**          | Push/pull stories | Create tickets, query issues, archive done stories |
 | **Confluence**    | Documentation     | Push summaries/reports to Confluence spaces         |
 | **Google Analytics** | Access GA4 data   | Query analytics for Spotto products                |
+| **MSSQL** (`mssql`) | Read-only SQL     | Query the Spotto platform DB (`dbo.Publications`, `Customers`, …) — see [docs/mcp-setup.md](docs/mcp-setup.md) |
+| **MSSQL** (`mssql-comparison`) | Read-only SQL | Query the Vergelijkingspanden reference DB (`databricks` schema) for PR/data analyses — see [docs/mcp-setup.md](docs/mcp-setup.md) |
 
 ### Google Analytics
 

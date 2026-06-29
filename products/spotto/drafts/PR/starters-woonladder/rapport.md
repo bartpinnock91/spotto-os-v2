@@ -7,7 +7,7 @@
 **In dit artikel:**
 
 - Het aandeel betaalbare huizen (onder €350.000) zakte in twee jaar van 43% naar 36% van het aanbod
-- Instapappartementen werden elk jaar duurder per vierkante meter (+6% op twee jaar)
+- Instapappartementen werden elk jaar duurder per vierkante meter (bijna +6% op twee jaar)
 - Bijna twee derde van de goedkoopste huizen (onder €250.000) is een renovatiewoning met EPC-label E of F
 
 ---
@@ -16,13 +16,13 @@
 
 Het aandeel huizen dat te koop staat voor minder dan €350.000 is op twee jaar tijd gezakt van 43% naar 36% van de markt. In de categorie onder €250.000 ging het van 17% naar 13%. Er staan dus niet alleen minder betaalbare woningen te koop, ze maken ook een almaar kleiner deel uit van wat een koper te zien krijgt.
 
-De oorzaak is tweeledig. Voor een deel stijgen de prijzen net rond die grensbedragen, voor een deel verschuift gewoon wat er te koop komt. Woningen "groeien uit" hun prijsklasse. Een huis dat in 2024 nog voor €340.000 te koop stond, passeert na een prijsstijging vlot de grens van €350.000 en valt zo buiten het bereik van wie maximaal €350.000 kan besteden. Tegelijk komen er aan de onderkant ook minder betaalbare panden op de markt.
+De verschuiving heeft twee kanten. Ten eerste stegen de vraagprijzen over de hele lijn, terwijl de grens van €350.000 vast blijft: bij een algemene prijsstijging zakt het aandeel onder een vaste drempel dus ook zonder dat er iets aan het aanbod verandert. Ten tweede verschoof de samenstelling van wat te koop komt, met proportioneel minder betaalbare panden en meer woningen in duurdere klassen.
 
 ## Instapappartementen worden elk jaar duurder
 
 Bij appartementen loopt net de onderkant het snelst op. Het goedkoopste segment, onder €250.000, is precies waar starters terechtkomen. Daar steeg de prijs per vierkante meter elk van de afgelopen drie lentes: van €2.549/m² in 2024 naar €2.694/m² in 2026, een stijging van bijna 6%. Het is dus net de instapprijs die het hardst oploopt, op het moment dat de budgetten al het krapst zitten.
 
-In de duurdere klassen lag de prijs per vierkante meter vlak of lager, maar die segmenten zijn klein en de cijfers er minder betrouwbaar (zie databijlage).
+In het middensegment (€250.000–€500.000) stegen de prijzen per vierkante meter trager dan bij de instap. In de duurste klassen daalde de mediaan zelfs, deels doordat de aangeboden appartementen daar groter werden (zie databijlage).
 
 ## De onderkant is steeds vaker een renovatieproject
 
@@ -40,7 +40,7 @@ De trend die Spotto in zijn vraagprijzen ziet, loopt gelijk met de verkoopprijze
 
 De terugval van het betaalbare aanbod speelt in heel Vlaanderen, maar niet overal even sterk. **Limburg**, traditioneel een van de meest betaalbare provincies, kende de scherpste daling: het aandeel huizen onder €350.000 zakte er op twee jaar van 53% naar 41%. Ook in **West-Vlaanderen**, lange tijd een toevluchtsoord voor wie betaalbaar wou kopen, viel het terug van 54% naar 47%. In **Antwerpen en Vlaams-Brabant** is intussen nog maar ongeveer een kwart van de huizen die te koop staan onder €350.000 te vinden.
 
-Bij appartementen stegen de prijzen per vierkante meter het sterkst in **Vlaams-Brabant (+11%)** en de **provincie Antwerpen (+9%)**. In **West-Vlaanderen** bleven ze achter. Die regionale appartementscijfers berusten wel op kleinere aantallen en zijn dus voorzichtiger te lezen (zie databijlage).
+Bij appartementen stegen de prijzen per vierkante meter het sterkst in **Vlaams-Brabant (+11%)** en de **provincie Antwerpen (+8,7%)**. In **West-Vlaanderen** daalden ze zelfs licht (−5,6%). Die regionale appartementscijfers berusten op kleinere steekproeven dan het Vlaanderen-cijfer en zijn dus voorzichtiger te lezen (zie databijlage).
 
 ## Wat het betekent voor starters
 
@@ -98,7 +98,7 @@ Prijsverschillen tússen prijsklassen zijn vraagprijssignalen en werden niet apa
 | Provincie | 2024 | 2026 | Δ |
 | --- | --: | --: | --: |
 | West-Vlaanderen | 54% | 47% | −7 pp |
-| Limburg | 53% | 41% | **−13 pp** |
+| Limburg | 53% | 41% | **−12 pp** |
 | Oost-Vlaanderen | 43% | 38% | −5 pp |
 | Antwerpen | 33% | 25% | −8 pp |
 | Vlaams-Brabant | 31% | 25% | −6 pp |
@@ -123,7 +123,7 @@ Prijsverschillen tússen prijsklassen zijn vraagprijssignalen en werden niet apa
 | €500–750k | 12% | 51% | 6% |
 | €750k+ | 10% | 56% | 3% |
 
-*EPC E/F = valt onder de renovatieverplichting (naar label D binnen 5 jaar). EPC-percentages berekend op woningen met gekend EPC-label (~97% van het aanbod).*
+*EPC E/F = valt onder de renovatieverplichting (naar label D binnen 5 jaar). EPC A–B = labels A+, A of B. EPC-percentages berekend op woningen met gekend EPC-label (~97% van het aanbod).*
 
 **Referentie — afstemming met externe cijfers**
 
