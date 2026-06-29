@@ -1,9 +1,0 @@
-pand_type,listing_season,total_listings,median_days,p25_days,p75_days
-Appartement,Spring,14634,110,39,232
-Appartement,Summer,10030,108,44,214
-Appartement,Autumn,10832,100,44,188
-Appartement,Winter,9793,105,45,224
-Huis,Spring,24935,83,32,179
-Huis,Summer,19312,85,32,177
-Huis,Autumn,19676,87,35,166
-Huis,Winter,15502,88,37,182
